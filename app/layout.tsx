@@ -13,6 +13,11 @@ export const metadata: Metadata = {
   title: "DopaWay | Foco, Energia e Alta Performance",
   description:
     "Conheça a DopaWay, uma proposta premium para quem busca mais foco, energia, constância e presença na rotina.",
+  icons: {
+    icon: "/icon.svg",
+    shortcut: "/icon.svg",
+    apple: "/icon.svg",
+  },
   openGraph: {
     title: "DopaWay | Foco, Energia e Alta Performance",
     description:
