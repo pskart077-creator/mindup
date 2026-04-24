@@ -1,55 +1,55 @@
 const FAQ_ITEMS = [
   {
-    question: "Quando meu pedido é enviado?",
+    question: "O frete é grátis mesmo?",
     answer:
-      "Após a confirmação do pagamento, o pedido segue para separação e envio conforme o prazo da opção de frete escolhida no momento da compra.",
+      "Sim. Você consulta o frete no checkout, escolhe a opção grátis disponível para o seu CEP e finaliza o pedido sem pagar entrega.",
   },
   {
-    question: "Posso pagar com PIX?",
+    question: "Qual kit vale mais a pena?",
     answer:
-      "Sim. Você pode concluir sua compra com PIX e também verificar as opções de pagamento disponíveis no checkout no momento do pedido.",
+      "Os kits com mais frascos reduzem o valor por unidade. Se você quer continuidade e melhor custo por frasco, os kits maiores são a escolha mais agressiva.",
   },
   {
-    question: "Como acompanho a entrega?",
+    question: "Tenho garantia para comprar sem medo?",
     answer:
-      "Depois da confirmação do pagamento, você recebe as informações de acompanhamento da entrega pelos dados cadastrados na compra.",
+      "Sim. A MindUp conta com 30 dias de garantia para você avaliar a experiência dentro do prazo informado.",
   },
   {
-    question: "Se eu tiver dúvida, existe suporte?",
+    question: "Quando meu pedido começa a andar?",
     answer:
-      "Sim. Nossa equipe está disponível para ajudar em dúvidas sobre compra, acompanhamento do pedido e atendimento no pós-venda.",
+      "Após a confirmação do pagamento, o pedido segue para separação e envio conforme o prazo da opção de frete grátis escolhida no checkout.",
   },
 ] as const;
 
 export function FaqSection() {
   return (
-    <section id="faq" className="dopaway-faq-section">
-      <div className="dopaway-faq-section__container">
-        <div className="dopaway-faq-section__head">
-          <span className="dopaway-faq-section__eyebrow">
-            Perguntas frequentes
+    <section id="faq" className="mindup-faq-section">
+      <div className="mindup-faq-section__container">
+        <div className="mindup-faq-section__head">
+          <span className="mindup-faq-section__eyebrow">
+            Tire a dúvida e compre
           </span>
 
-          <h2 className="dopaway-faq-section__title">
-            Tire suas dúvidas antes de escolher a sua DopaWay
+          <h2 className="mindup-faq-section__title">
+            O que falta para você garantir sua MindUp hoje?
           </h2>
 
-          <p className="dopaway-faq-section__subtitle">
-            Reunimos as respostas para as dúvidas mais comuns para que sua
-            experiência de compra seja mais simples, segura e tranquila.
+          <p className="mindup-faq-section__subtitle">
+            Frete grátis, garantia de 30 dias e kits com melhor custo por frasco.
+            A compra foi pensada para ser simples, rápida e sem fricção.
           </p>
         </div>
 
-        <div className="dopaway-faq-section__grid">
+        <div className="mindup-faq-section__grid">
           {FAQ_ITEMS.map((item) => (
-            <details key={item.question} className="dopaway-faq-section__item">
-              <summary className="dopaway-faq-section__question">
+            <details key={item.question} className="mindup-faq-section__item">
+              <summary className="mindup-faq-section__question">
                 <span>{item.question}</span>
-                <span className="dopaway-faq-section__plus" />
+                <span className="mindup-faq-section__plus" />
               </summary>
 
-              <div className="dopaway-faq-section__answer-wrap">
-                <p className="dopaway-faq-section__answer">{item.answer}</p>
+              <div className="mindup-faq-section__answer-wrap">
+                <p className="mindup-faq-section__answer">{item.answer}</p>
               </div>
             </details>
           ))}

@@ -10,36 +10,6 @@ type FreightInput = {
   quantity: number;
 };
 
-const BASE_RATE_BY_STATE: Record<string, number> = {
-  AC: 3190,
-  AL: 2790,
-  AP: 3190,
-  AM: 3290,
-  BA: 2490,
-  CE: 2590,
-  DF: 1990,
-  ES: 1990,
-  GO: 2090,
-  MA: 2790,
-  MT: 2390,
-  MS: 2390,
-  MG: 1890,
-  PA: 3090,
-  PB: 2790,
-  PR: 1890,
-  PE: 2590,
-  PI: 2790,
-  RJ: 1890,
-  RN: 2690,
-  RS: 1990,
-  RO: 2890,
-  RR: 3290,
-  SC: 1890,
-  SP: 1490,
-  SE: 2690,
-  TO: 2790
-};
-
 const REGION_BY_STATE: Record<string, "southeast" | "south" | "center" | "north" | "northeast"> =
   {
     AC: "north",
@@ -115,28 +85,22 @@ function getEtaDays(region: string) {
   return { standard: 10, express: 5 };
 }
 
-export async function calculateFreight({ cep, quantity }: FreightInput) {
-  const safeQuantity = Number.isFinite(quantity) && quantity > 0 ? quantity : 1;
+export async function calculateFreight({ cep }: FreightInput) {
   const state = await getStateByCep(cep);
   const region = REGION_BY_STATE[state] ?? "southeast";
-  const baseRateCents = BASE_RATE_BY_STATE[state] ?? 2390;
-  const unitIncrement = 290;
-
-  const standardBase = baseRateCents + (safeQuantity - 1) * unitIncrement;
-  const expressBase = Math.round(standardBase * 1.55);
   const etaDays = getEtaDays(region);
 
   const options: FreightOption[] = [
     {
       id: "standard",
-      label: "Padrao",
-      priceCents: standardBase,
+      label: "Padrao gratis",
+      priceCents: 0,
       etaDays: etaDays.standard
     },
     {
       id: "express",
-      label: "Expresso",
-      priceCents: expressBase,
+      label: "Expresso gratis",
+      priceCents: 0,
       etaDays: etaDays.express
     }
   ];

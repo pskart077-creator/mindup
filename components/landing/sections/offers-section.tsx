@@ -26,48 +26,48 @@ export function OffersSection({ product }: OffersSectionProps) {
       name: "1 frasco",
       quantity: 1,
       discount: 0,
-      subtitle: "Ideal para começar sua experiência com a DopaWay",
+      subtitle: "Para começar hoje e sentir a diferença na rotina",
     },
     {
       name: "2 frascos",
       quantity: 2,
       discount: 0.08,
       tag: "Mais vendido",
-      subtitle: "Melhor equilíbrio entre continuidade e economia",
+      subtitle: "Mais continuidade, mais economia e compra mais inteligente",
     },
     {
       name: "3 frascos",
       quantity: 3,
       discount: 0.16,
-      subtitle: "Mais constância para manter o ritmo por mais tempo",
+      subtitle: "Para não parar no primeiro frasco e manter o plano",
     },
     {
       name: "5 frascos",
       quantity: 5,
       discount: 0.24,
-      subtitle: "Escolha ideal para quem quer máxima vantagem por frasco",
+      subtitle: "O melhor custo por frasco para quem quer vantagem máxima",
     },
   ] as const;
 
   return (
-    <section id="kits" className="dopaway-offers-section">
-      <div className="dopaway-offers-section__container">
-        <div className="dopaway-offers-section__head">
-          <span className="dopaway-offers-section__eyebrow">
-            Escolha sua quantidade
+    <section id="kits" className="mindup-offers-section">
+      <div className="mindup-offers-section__container">
+        <div className="mindup-offers-section__head">
+          <span className="mindup-offers-section__eyebrow">
+            Oferta com frete grátis
           </span>
 
-          <h2 className="dopaway-offers-section__title">
-            Kits pensados para quem quer mais foco, constância e vantagem na compra
+          <h2 className="mindup-offers-section__title">
+            Leve mais, pague menos por frasco e não desperdice dinheiro com frete
           </h2>
 
-          <p className="dopaway-offers-section__subtitle">
-            Escolha a opção que melhor acompanha sua rotina e aproveite condições
-            mais vantajosas ao levar mais unidades.
+          <p className="mindup-offers-section__subtitle">
+            A compra mais esperta está nos kits. Você garante MindUp para mais tempo,
+            reduz o valor por frasco e ainda recebe com frete grátis.
           </p>
         </div>
 
-        <div className="dopaway-offers-section__grid">
+        <div className="mindup-offers-section__grid">
           {kits.map((kit) => {
             const fullPrice = product.priceCents * kit.quantity;
             const salePrice = calculateKitPrice(
@@ -81,43 +81,43 @@ export function OffersSection({ product }: OffersSectionProps) {
             return (
               <article
                 key={kit.name}
-                className={`dopaway-offers-section__card ${
+                className={`mindup-offers-section__card ${
                   kit.tag ? "is-featured" : ""
                 }`}
               >
                 {kit.tag ? (
-                  <span className="dopaway-offers-section__tag">{kit.tag}</span>
+                  <span className="mindup-offers-section__tag">{kit.tag}</span>
                 ) : null}
 
-                <h3 className="dopaway-offers-section__card-title">{kit.name}</h3>
+                <h3 className="mindup-offers-section__card-title">{kit.name}</h3>
 
-                <p className="dopaway-offers-section__card-subtitle">
+                <p className="mindup-offers-section__card-subtitle">
                   {kit.subtitle}
                 </p>
 
-                <div className="dopaway-offers-section__prices">
-                  <p className="dopaway-offers-section__old-price">
+                <div className="mindup-offers-section__prices">
+                  <p className="mindup-offers-section__old-price">
                     {formatCurrency(fullPrice)}
                   </p>
 
-                  <p className="dopaway-offers-section__new-price">
+                  <p className="mindup-offers-section__new-price">
                     {formatCurrency(salePrice)}
                   </p>
 
-                  <p className="dopaway-offers-section__installments">
+                  <p className="mindup-offers-section__installments">
                     ou 12x de {formatCurrency(installment)}
                   </p>
 
-                  <p className="dopaway-offers-section__unit-price">
+                  <p className="mindup-offers-section__unit-price">
                     {formatCurrency(unitPrice)} por frasco
                   </p>
                 </div>
 
                 <Link
                   href="/checkout"
-                  className="dopaway-offers-section__button"
+                  className="mindup-offers-section__button"
                 >
-                  Comprar agora
+                  Garantir este kit
                 </Link>
               </article>
             );

@@ -2,27 +2,28 @@ import Link from "next/link";
 
 export function FinalCtaSection() {
   return (
-    <section className="dopaway-final-cta-section">
-      <div className="dopaway-final-cta-section__container">
-        <span className="dopaway-final-cta-section__eyebrow">
-          Sua rotina pode ir além
+    <section className="mindup-final-cta-section">
+      <div className="mindup-final-cta-section__container">
+        <span className="mindup-final-cta-section__eyebrow">
+          Não deixe para depois
         </span>
 
-        <h2 className="dopaway-final-cta-section__title">
-          Escolha a DopaWay e leve mais foco, energia e constância para o seu dia
+        <h2 className="mindup-final-cta-section__title">
+          Garanta sua MindUp agora e pare de negociar com a própria falta de energia.
         </h2>
 
-        <p className="dopaway-final-cta-section__description">
-          Aproveite para garantir sua DopaWay agora e dar o próximo passo com uma
-          proposta pensada para quem quer mais presença, intensidade e ritmo na rotina.
+        <p className="mindup-final-cta-section__description">
+          Escolha seu kit, aproveite frete grátis e finalize em poucos minutos.
+          Sua rotina vai continuar exigindo de você. A decisão de se preparar melhor
+          pode ser tomada agora.
         </p>
 
-        <div className="dopaway-final-cta-section__actions">
+        <div className="mindup-final-cta-section__actions">
           <Link
             href="/checkout"
-            className="dopaway-final-cta-section__button"
+            className="mindup-final-cta-section__button"
           >
-            Comprar agora
+            Garantir meu MindUp
           </Link>
         </div>
       </div>

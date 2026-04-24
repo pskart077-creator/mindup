@@ -23,30 +23,30 @@ export default function Header() {
   }
 
   return (
-    <header className="dopaway-header">
-      <div className="dopaway-header__container">
+    <header className="mindup-header">
+      <div className="mindup-header__container">
         <Link
           href="#inicio"
-          className="dopaway-header__brand"
+          className="mindup-header__brand"
           aria-label="Ir para o topo da pagina"
           onClick={handleCloseMenu}
         >
           <Image
             src="/assets/image/logo/logo.svg"
-            alt="Logo DopaWay"
+            alt="Logo MindUp"
             width={260}
             height={54}
-            className="dopaway-header__logo"
+            className="mindup-header__logo"
             priority
           />
         </Link>
 
-        <nav className="dopaway-header__nav" aria-label="Menu principal">
+        <nav className="mindup-header__nav" aria-label="Menu principal">
           {navItems.map((item) => (
             <a
               key={item.label}
               href={item.href}
-              className="dopaway-header__nav-link"
+              className="mindup-header__nav-link"
               onClick={handleCloseMenu}
             >
               {item.label}
@@ -54,17 +54,17 @@ export default function Header() {
           ))}
         </nav>
 
-        <div className="dopaway-header__actions">
-          <Link href="/checkout" className="dopaway-header__button">
-            Comprar Agora
+        <div className="mindup-header__actions">
+          <Link href="/checkout" className="mindup-header__button">
+            Garantir MindUp
           </Link>
 
           <button
             type="button"
-            className={`dopaway-header__menu-toggle ${menuOpen ? "is-active" : ""}`}
+            className={`mindup-header__menu-toggle ${menuOpen ? "is-active" : ""}`}
             aria-label={menuOpen ? "Fechar menu" : "Abrir menu"}
             aria-expanded={menuOpen}
-            aria-controls="dopaway-mobile-menu"
+            aria-controls="mindup-mobile-menu"
             onClick={handleToggleMenu}
           >
             <span />
@@ -75,15 +75,15 @@ export default function Header() {
       </div>
 
       <div
-        id="dopaway-mobile-menu"
-        className={`dopaway-mobile-menu ${menuOpen ? "is-open" : ""}`}
+        id="mindup-mobile-menu"
+        className={`mindup-mobile-menu ${menuOpen ? "is-open" : ""}`}
       >
-        <nav className="dopaway-mobile-menu__nav" aria-label="Menu mobile">
+        <nav className="mindup-mobile-menu__nav" aria-label="Menu mobile">
           {navItems.map((item) => (
             <a
               key={item.label}
               href={item.href}
-              className="dopaway-mobile-menu__link"
+              className="mindup-mobile-menu__link"
               onClick={handleCloseMenu}
             >
               {item.label}
@@ -91,13 +91,13 @@ export default function Header() {
           ))}
         </nav>
 
-        <div className="dopaway-mobile-menu__actions">
+        <div className="mindup-mobile-menu__actions">
           <Link
             href="/checkout"
-            className="dopaway-mobile-menu__button"
+            className="mindup-mobile-menu__button"
             onClick={handleCloseMenu}
           >
-            Comprar Agora
+            Garantir MindUp
           </Link>
         </div>
       </div>

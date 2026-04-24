@@ -1,48 +1,48 @@
 const TESTIMONIALS = [
   {
     name: "Leandro, 34 anos",
-    text: "Percebi mais constância na minha rotina e uma sensação melhor de ritmo ao longo do dia. Para mim, isso fez diferença principalmente nas horas em que eu costumava perder rendimento.",
+    text: "Eu compraria de novo. A MindUp encaixou na minha rotina e me ajudou a manter mais ritmo justamente nas horas em que eu costumava cair de rendimento.",
   },
   {
     name: "Camila, 29 anos",
-    text: "Gostei da proposta da DopaWay porque combina com uma rotina mais intensa. Senti mais presença para manter o foco nas atividades e seguir o dia com mais clareza.",
+    text: "Escolhi o kit porque não queria testar só por poucos dias. Foi uma compra prática, com frete grátis, e senti mais presença para atravessar uma rotina puxada.",
   },
   {
     name: "Rafael, 41 anos",
-    text: "O que mais me chamou atenção foi a sensação de continuidade. Em vez de começar bem e cair depois, senti minha rotina mais estável e produtiva.",
+    text: "O que me ganhou foi a constância. Não é sobre promessa mágica, é sobre ter um apoio para parar de empurrar o dia e executar melhor.",
   },
 ] as const;
 
 export function TestimonialsSection() {
   return (
-    <section id="depoimentos" className="dopaway-testimonials-section">
-      <div className="dopaway-testimonials-section__container">
-        <div className="dopaway-testimonials-section__head">
-          <span className="dopaway-testimonials-section__eyebrow">
-            Experiências com a DopaWay
+    <section id="depoimentos" className="mindup-testimonials-section">
+      <div className="mindup-testimonials-section__container">
+        <div className="mindup-testimonials-section__head">
+          <span className="mindup-testimonials-section__eyebrow">
+            Quem compra entende
           </span>
 
-          <h2 className="dopaway-testimonials-section__title">
-            Quem experimenta destaca mais constância, foco e presença na rotina
+          <h2 className="mindup-testimonials-section__title">
+            MindUp é para quem quer parar de aceitar uma rotina pela metade
           </h2>
 
-          <p className="dopaway-testimonials-section__subtitle">
-            Relatos de pessoas que buscavam uma proposta mais premium para acompanhar
-            dias intensos com mais clareza, ritmo e continuidade.
+          <p className="mindup-testimonials-section__subtitle">
+            A decisão é simples: continuar reclamando da falta de ritmo ou escolher
+            um apoio para entrar no dia com mais foco, energia e constância.
           </p>
         </div>
 
-        <div className="dopaway-testimonials-section__grid">
+        <div className="mindup-testimonials-section__grid">
           {TESTIMONIALS.map((item) => (
             <article
               key={item.name}
-              className="dopaway-testimonials-section__card"
+              className="mindup-testimonials-section__card"
             >
-              <span className="dopaway-testimonials-section__quote">“</span>
+              <span className="mindup-testimonials-section__quote">“</span>
 
-              <p className="dopaway-testimonials-section__text">{item.text}</p>
+              <p className="mindup-testimonials-section__text">{item.text}</p>
 
-              <strong className="dopaway-testimonials-section__name">
+              <strong className="mindup-testimonials-section__name">
                 {item.name}
               </strong>
             </article>

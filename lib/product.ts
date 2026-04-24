@@ -3,8 +3,8 @@ export type ProductConfig = {
   priceCents: number;
 };
 
-const DEFAULT_PRODUCT_NAME = "DopaWay";
-const DEFAULT_PRODUCT_PRICE_CENTS = 12990;
+const DEFAULT_PRODUCT_NAME = "MindUp";
+const DEFAULT_PRODUCT_PRICE_CENTS = 5790;
 
 export function getProductConfig(): ProductConfig {
   const name = process.env.PRODUCT_NAME?.trim() || DEFAULT_PRODUCT_NAME;

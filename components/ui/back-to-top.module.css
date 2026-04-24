@@ -10,9 +10,9 @@
   width: 62px;
   height: 62px;
   padding: 0;
-  border: 1px solid rgba(255, 199, 0, 0.22);
+  border: 1px solid rgba(var(--brand-primary-rgb), 0.22);
   border-radius: 20px;
-  background: rgba(255, 199, 0, 0.08);
+  background: rgba(var(--brand-primary-rgb), 0.08);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   display: inline-flex;
@@ -32,7 +32,7 @@
   position: absolute;
   inset: 6px;
   border-radius: 15px;
-  border: 1px solid rgba(255, 199, 0, 0.12);
+  border: 1px solid rgba(var(--brand-primary-rgb), 0.12);
   pointer-events: none;
   transition: border-color 0.2s ease;
 }
@@ -48,8 +48,8 @@
   width: 42px;
   height: 42px;
   border-radius: 14px;
-  background: #ffc700;
-  color: #000000;
+  background: var(--brand-primary);
+  color: var(--text-main);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -76,21 +76,21 @@
 
 .button:hover {
   transform: translateY(-3px);
-  border-color: rgba(255, 199, 0, 0.38);
-  background: rgba(255, 199, 0, 0.12);
+  border-color: rgba(var(--brand-primary-rgb), 0.38);
+  background: rgba(var(--brand-primary-rgb), 0.12);
 }
 
 .button:hover::before {
-  border-color: rgba(255, 199, 0, 0.2);
+  border-color: rgba(var(--brand-primary-rgb), 0.2);
 }
 
 .button:hover .inner {
   transform: translateY(-1px);
-  background: #ffd42a;
+  background: var(--brand-primary-strong);
 }
 
 .button:focus-visible {
-  outline: 2px solid #ffffff;
+  outline: 2px solid var(--accent-blue);
   outline-offset: 4px;
 }
 

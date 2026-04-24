@@ -6,47 +6,46 @@ export default function CheckoutPage() {
   const product = getProductConfig();
 
   return (
-    <div className="dopaway-checkout-page">
-      <header className="dopaway-checkout-topbar">
-        <Link href="/" className="dopaway-checkout-topbar__back-link">
-          Voltar para a DopaWay
+    <div className="mindup-checkout-page">
+      <header className="mindup-checkout-topbar">
+        <Link href="/" className="mindup-checkout-topbar__back-link">
+          Voltar para a MindUp
         </Link>
 
-        <p className="dopaway-checkout-topbar__text">
+        <p className="mindup-checkout-topbar__text">
           Checkout oficial {product.name}
         </p>
       </header>
 
-      <main className="dopaway-checkout-layout">
-        <section className="dopaway-checkout-intro">
-          <span className="dopaway-checkout-intro__eyebrow">
-            Etapa de compra
+      <main className="mindup-checkout-layout">
+        <section className="mindup-checkout-intro">
+          <span className="mindup-checkout-intro__eyebrow">
+            Último passo
           </span>
 
-          <h1 className="dopaway-checkout-intro__title">
-            Finalize seu pedido com frete calculado de forma simples e segura
+          <h1 className="mindup-checkout-intro__title">
+            Garanta sua MindUp com frete grátis antes de voltar para a rotina no automático
           </h1>
 
-          <p className="dopaway-checkout-intro__description">
-            Esta etapa foi pensada para tornar sua compra mais prática. Aqui você
-            preenche seus dados, consulta o frete para o seu endereço e conclui
-            o pedido com mais segurança.
+          <p className="mindup-checkout-intro__description">
+            Falta pouco: preencha seus dados, escolha o frete grátis para o seu CEP
+            e gere o pagamento. Em poucos minutos seu pedido fica encaminhado.
           </p>
 
-          <div className="dopaway-checkout-intro__points">
-            <article className="dopaway-checkout-intro__point">
+          <div className="mindup-checkout-intro__points">
+            <article className="mindup-checkout-intro__point">
               <strong>1. Seus dados</strong>
-              <span>Preencha as informações para entrega e contato</span>
+              <span>Informe entrega e contato para liberar o pedido</span>
             </article>
 
-            <article className="dopaway-checkout-intro__point">
-              <strong>2. Frete</strong>
-              <span>Consulte a opção mais adequada para o seu CEP</span>
+            <article className="mindup-checkout-intro__point">
+              <strong>2. Frete grátis</strong>
+              <span>Consulte a opção disponível para o seu CEP</span>
             </article>
 
-            <article className="dopaway-checkout-intro__point">
+            <article className="mindup-checkout-intro__point">
               <strong>3. Pagamento</strong>
-              <span>Conclua seu pedido com mais praticidade e segurança</span>
+              <span>Finalize e garanta sua MindUp com segurança</span>
             </article>
           </div>
         </section>

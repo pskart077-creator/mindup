@@ -3,24 +3,31 @@
 ========================= */
 
 :root {
-  --bg-main: #000000;
-  --bg-alt: #050505;
-  --surface: #0b0b0b;
-  --surface-strong: #111111;
-  --line: #1f1f1f;
-  --line-soft: #151515;
+  --ink: #10367d;
+  --ink-rgb: 16, 54, 125;
+  --paper: #ebebeb;
+  --paper-rgb: 235, 235, 235;
+  --brand-primary: #a5cee0;
+  --brand-primary-rgb: 165, 206, 224;
+  --brand-primary-strong: #8fc1d8;
+  --brand-primary-soft: #d9eaf1;
+  --accent-blue: #10367d;
+  --accent-blue-rgb: 16, 54, 125;
 
-  --text-main: #ffffff;
-  --text-soft: rgba(255, 255, 255, 0.82);
-  --text-muted: rgba(255, 255, 255, 0.64);
+  --bg-main: var(--paper);
+  --bg-alt: var(--paper);
+  --surface: rgba(var(--brand-primary-rgb), 0.28);
+  --surface-strong: rgba(var(--brand-primary-rgb), 0.46);
+  --line: rgba(var(--accent-blue-rgb), 0.18);
+  --line-soft: rgba(var(--accent-blue-rgb), 0.1);
 
-  --brand-primary: #ffc700;
-  --brand-primary-strong: #ffcf1f;
-  --brand-primary-soft: #ffe27a;
+  --text-main: var(--ink);
+  --text-soft: rgba(var(--ink-rgb), 0.78);
+  --text-muted: rgba(var(--ink-rgb), 0.6);
 
-  --warning: #ffd976;
-  --danger: #f07f7f;
-  --ok: #66d49b;
+  --warning: var(--brand-primary-soft);
+  --danger: var(--accent-blue);
+  --ok: var(--brand-primary);
 
   --container-width: 1440px;
   --container-gap: 96px;
@@ -64,23 +71,177 @@ a {
   color: inherit;
 }
 
+/* =========================
+   VSL SECTION
+========================= */
+
+.mindup-vsl-section {
+  padding: 46px 0 58px;
+  background: var(--bg-main);
+}
+
+.mindup-vsl-section__container {
+  width: min(1120px, calc(100% - 120px));
+  margin: 0 auto;
+}
+
+.mindup-vsl-section__frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  background: var(--brand-primary-soft);
+  box-shadow: 0 22px 60px rgba(var(--ink-rgb), 0.12);
+}
+
+.mindup-vsl-section__video {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+  background: var(--brand-primary-soft);
+}
+
+.mindup-vsl-section__controls {
+  position: absolute;
+  left: 18px;
+  right: 18px;
+  bottom: 18px;
+  min-height: 60px;
+  padding: 10px 12px;
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: rgba(var(--paper-rgb), 0.92);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(10px);
+  transition:
+    opacity 0.22s ease,
+    visibility 0.22s ease,
+    transform 0.22s ease;
+}
+
+.mindup-vsl-section__frame:hover .mindup-vsl-section__controls,
+.mindup-vsl-section__frame:focus-within .mindup-vsl-section__controls,
+.mindup-vsl-section__frame.is-controls-visible .mindup-vsl-section__controls {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.mindup-vsl-section__play-button {
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: none;
+  border-radius: 999px;
+  background: var(--brand-primary);
+  color: var(--text-main);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.mindup-vsl-section__play-button:hover {
+  background: var(--brand-primary-strong);
+  transform: translateY(-1px);
+}
+
+.mindup-vsl-section__play-button svg {
+  display: block;
+}
+
+.mindup-vsl-section__timeline {
+  position: relative;
+  height: 9px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(var(--ink-rgb), 0.16);
+  pointer-events: none;
+}
+
+.mindup-vsl-section__timeline-fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  border-radius: inherit;
+  background: var(--accent-blue);
+}
+
+.mindup-vsl-section__time {
+  color: rgba(var(--ink-rgb), 0.78);
+  font-size: 0.88rem;
+  line-height: 1;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+@media (max-width: 1200px) {
+  .mindup-vsl-section__container {
+    width: min(100% - 72px, 1120px);
+  }
+}
+
+@media (max-width: 768px) {
+  .mindup-vsl-section {
+    padding: 28px 0 38px;
+  }
+
+  .mindup-vsl-section__container {
+    width: min(100% - 32px, 1120px);
+  }
+
+  .mindup-vsl-section__frame {
+    border-radius: 18px;
+  }
+
+  .mindup-vsl-section__controls {
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    min-height: auto;
+    grid-template-columns: 40px minmax(0, 1fr);
+    gap: 10px;
+    padding: 9px 10px;
+    border-radius: 14px;
+  }
+
+  .mindup-vsl-section__play-button {
+    width: 40px;
+    height: 40px;
+  }
+
+  .mindup-vsl-section__time {
+    grid-column: 2;
+    font-size: 0.74rem;
+  }
+}
+
 
 /* =========================
    HERO SECTION
 ========================= */
 
-.dopaway-hero {
-  background: #000000;
+.mindup-hero {
+  background: var(--bg-main);
   padding: 0 0 var(--hero-bottom-space);
   overflow: hidden;
 }
-
 
 /* =========================
    HERO CONTAINER
 ========================= */
 
-.dopaway-hero__container {
+.mindup-hero__container {
   width: min(var(--container-width), calc(100% - 120px));
   margin: 0 auto;
   display: grid;
@@ -96,33 +257,33 @@ a {
    HERO CONTENT
 ========================= */
 
-.dopaway-hero__content {
+.mindup-hero__content {
   max-width: 760px;
   width: 100%;
 }
 
-.dopaway-hero__eyebrow {
+.mindup-hero__eyebrow {
   display: inline-block;
   margin-bottom: 16px;
   font-size: 0.95rem;
   line-height: 1.45;
   font-weight: 500;
-  color: rgba(255, 255, 255, 0.92);
-  letter-spacing: -0.01em;
+  color: rgba(var(--ink-rgb), 0.92);
+  letter-spacing: 0;
 }
 
-.dopaway-hero__title {
+.mindup-hero__title {
   margin: 0;
   max-width: 760px;
   font-family: var(--font-heading);
   font-size: 48px;
   line-height: 1.04;
   font-weight: 700;
-  letter-spacing: -0.07em;
-  color: #ffffff;
+  letter-spacing: 0;
+  color: var(--text-main);
 }
 
-.dopaway-hero__text {
+.mindup-hero__text {
   margin: 20px 0 0;
   max-width: 640px;
   font-size: 16px;
@@ -136,11 +297,11 @@ a {
    HERO ACTIONS
 ========================= */
 
-.dopaway-hero__actions {
+.mindup-hero__actions {
   margin-top: 30px;
 }
 
-.dopaway-hero__button {
+.mindup-hero__button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -150,15 +311,15 @@ a {
   border: none;
   border-radius: 999px;
   background: var(--brand-primary);
-  color: #000000;
+  color: var(--text-main);
   font-family: var(--font-heading);
   font-size: 1.1rem;
   font-weight: 700;
-  letter-spacing: -0.03em;
+  letter-spacing: 0;
   transition: background 0.2s ease, transform 0.2s ease;
 }
 
-.dopaway-hero__button:hover {
+.mindup-hero__button:hover {
   background: var(--brand-primary-strong);
   transform: translateY(-1px);
 }
@@ -168,21 +329,21 @@ a {
    HERO TRUST
 ========================= */
 
-.dopaway-hero__trust {
+.mindup-hero__trust {
   display: flex;
   flex-wrap: wrap;
   gap: 28px;
   margin-top: 30px;
 }
 
-.dopaway-hero__trust-item {
+.mindup-hero__trust-item {
   display: inline-flex;
   align-items: center;
   gap: 12px;
-  color: #ffffff;
+  color: var(--text-main);
 }
 
-.dopaway-hero__trust-icon {
+.mindup-hero__trust-icon {
   width: 30px;
   height: 30px;
   display: inline-flex;
@@ -191,18 +352,18 @@ a {
   flex: 0 0 30px;
 }
 
-.dopaway-hero__trust-icon svg {
+.mindup-hero__trust-icon svg {
   width: 100%;
   height: 100%;
 }
 
-.dopaway-hero__trust-item strong {
+.mindup-hero__trust-item strong {
   display: block;
   font-size: 1rem;
   line-height: 1.1;
   font-weight: 600;
-  letter-spacing: -0.03em;
-  color: #ffffff;
+  letter-spacing: 0;
+  color: var(--text-main);
 }
 
 
@@ -210,7 +371,7 @@ a {
    HERO VISUAL
 ========================= */
 
-.dopaway-hero__visual {
+.mindup-hero__visual {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -218,13 +379,13 @@ a {
   width: 100%;
 }
 
-.dopaway-hero__image-wrap {
+.mindup-hero__image-wrap {
   position: relative;
   width: min(100%, 520px);
   aspect-ratio: 1 / 1.12;
 }
 
-.dopaway-hero__image {
+.mindup-hero__image {
   object-fit: contain;
   object-position: center;
   display: block;
@@ -236,23 +397,23 @@ a {
 ========================= */
 
 @media (max-width: 1280px) {
-  .dopaway-hero__container {
+  .mindup-hero__container {
     width: min(var(--container-width), calc(100% - 72px));
     grid-template-columns: minmax(0, 1.08fr) minmax(360px, 0.92fr);
     column-gap: 72px;
   }
 
-  .dopaway-hero__title {
+  .mindup-hero__title {
     font-size: clamp(3rem, 5vw, 4.5rem);
   }
 }
 
 @media (max-width: 1100px) {
-  .dopaway-hero {
+  .mindup-hero {
     padding: 0 0 68px;
   }
 
-  .dopaway-hero__container {
+  .mindup-hero__container {
     width: min(100% - 48px, 1280px);
     grid-template-columns: 1fr;
     min-height: auto;
@@ -260,72 +421,72 @@ a {
     padding-top: 42px;
   }
 
-  .dopaway-hero__content {
+  .mindup-hero__content {
     max-width: 100%;
   }
 
-  .dopaway-hero__title {
+  .mindup-hero__title {
     max-width: 100%;
   }
 
-  .dopaway-hero__text {
+  .mindup-hero__text {
     max-width: 720px;
   }
 
-  .dopaway-hero__visual {
+  .mindup-hero__visual {
     min-height: auto;
   }
 
-  .dopaway-hero__image-wrap {
+  .mindup-hero__image-wrap {
     width: min(100%, 420px);
   }
 }
 
 @media (max-width: 768px) {
-  .dopaway-hero {
+  .mindup-hero {
     padding: 0 0 56px;
   }
 
-  .dopaway-hero__container {
+  .mindup-hero__container {
     width: min(100% - 32px, 1280px);
     row-gap: 28px;
     padding-top: 28px;
   }
 
-  .dopaway-hero__eyebrow {
+  .mindup-hero__eyebrow {
     font-size: 0.82rem;
     line-height: 1.4;
   }
 
-  .dopaway-hero__title {
+  .mindup-hero__title {
     font-size: 2.55rem;
     line-height: 0.96;
   }
 
-  .dopaway-hero__text {
+  .mindup-hero__text {
     font-size: 0.98rem;
     line-height: 1.66;
   }
 
-  .dopaway-hero__actions {
+  .mindup-hero__actions {
     margin-top: 26px;
   }
 
-  .dopaway-hero__button {
+  .mindup-hero__button {
     width: 100%;
     max-width: 320px;
     height: 56px;
     font-size: 1rem;
   }
 
-  .dopaway-hero__trust {
+  .mindup-hero__trust {
     flex-direction: column;
     align-items: flex-start;
     gap: 16px;
     margin-top: 26px;
   }
 
-  .dopaway-hero__image-wrap {
+  .mindup-hero__image-wrap {
     width: min(100%, 320px);
   }
 }
@@ -334,12 +495,12 @@ a {
    HEADER
 ========================= */
 
-.dopaway-header {
+.mindup-header {
   position: relative;
   z-index: 100;
   width: 100%;
-  background: #ffc700;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  background: var(--brand-primary);
+  border-bottom: 1px solid var(--line);
 }
 
 
@@ -347,7 +508,7 @@ a {
    HEADER CONTAINER
 ========================= */
 
-.dopaway-header__container {
+.mindup-header__container {
   width: min(1440px, calc(100% - 64px));
   min-height: 94px;
   margin: 0 auto;
@@ -362,13 +523,13 @@ a {
    HEADER BRAND
 ========================= */
 
-.dopaway-header__brand {
+.mindup-header__brand {
   display: inline-flex;
   align-items: center;
   justify-content: flex-start;
 }
 
-.dopaway-header__logo {
+.mindup-header__logo {
   display: block;
   width: auto;
   height: 52px;
@@ -379,22 +540,22 @@ a {
    HEADER NAV
 ========================= */
 
-.dopaway-header__nav {
+.mindup-header__nav {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 28px;
 }
 
-.dopaway-header__nav-link {
-  color: #000000;
+.mindup-header__nav-link {
+  color: var(--text-main);
   font-size: 1.05rem;
   font-weight: 500;
   line-height: 1;
   transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
-.dopaway-header__nav-link:hover {
+.mindup-header__nav-link:hover {
   opacity: 0.72;
   transform: translateY(-1px);
 }
@@ -404,30 +565,31 @@ a {
    HEADER ACTIONS
 ========================= */
 
-.dopaway-header__actions {
+.mindup-header__actions {
   display: flex;
   align-items: center;
   justify-content: flex-end;
   gap: 14px;
 }
 
-.dopaway-header__button {
+.mindup-header__button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   min-width: 234px;
   height: 60px;
   padding: 0 34px;
+  border: 1px solid var(--line);
   border-radius: 999px;
-  background: #000000;
-  color: #ffffff;
+  background: var(--bg-main);
+  color: var(--text-main);
   font-size: 1rem;
   font-weight: 600;
   line-height: 1;
   transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
-.dopaway-header__button:hover {
+.mindup-header__button:hover {
   opacity: 0.9;
   transform: translateY(-1px);
 }
@@ -437,14 +599,14 @@ a {
    MENU TOGGLE
 ========================= */
 
-.dopaway-header__menu-toggle {
+.mindup-header__menu-toggle {
   display: none;
   width: 54px;
   height: 54px;
   padding: 0;
-  border: none;
+  border: 1px solid var(--line);
   border-radius: 999px;
-  background: #000000;
+  background: var(--bg-main);
   cursor: pointer;
   align-items: center;
   justify-content: center;
@@ -453,29 +615,29 @@ a {
   transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
-.dopaway-header__menu-toggle:hover {
+.mindup-header__menu-toggle:hover {
   opacity: 0.92;
   transform: translateY(-1px);
 }
 
-.dopaway-header__menu-toggle span {
+.mindup-header__menu-toggle span {
   display: block;
   width: 20px;
   height: 2px;
   border-radius: 999px;
-  background: #ffffff;
+  background: var(--text-main);
   transition: transform 0.25s ease, opacity 0.25s ease;
 }
 
-.dopaway-header__menu-toggle.is-active span:nth-child(1) {
+.mindup-header__menu-toggle.is-active span:nth-child(1) {
   transform: translateY(7px) rotate(45deg);
 }
 
-.dopaway-header__menu-toggle.is-active span:nth-child(2) {
+.mindup-header__menu-toggle.is-active span:nth-child(2) {
   opacity: 0;
 }
 
-.dopaway-header__menu-toggle.is-active span:nth-child(3) {
+.mindup-header__menu-toggle.is-active span:nth-child(3) {
   transform: translateY(-7px) rotate(-45deg);
 }
 
@@ -484,19 +646,19 @@ a {
    MOBILE MENU
 ========================= */
 
-.dopaway-mobile-menu {
+.mindup-mobile-menu {
   display: none;
 }
 
 @media (max-width: 900px) {
-  .dopaway-mobile-menu {
+  .mindup-mobile-menu {
     display: block;
     position: absolute;
     top: 100%;
     left: 0;
     width: 100%;
-    background: #ffc700;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    background: var(--brand-primary);
+    border-bottom: 4px solid var(--accent-blue);
     padding: 0 16px;
     max-height: 0;
     overflow: hidden;
@@ -509,53 +671,54 @@ a {
       padding 0.25s ease;
   }
 
-  .dopaway-mobile-menu.is-open {
+  .mindup-mobile-menu.is-open {
     max-height: 420px;
     opacity: 1;
     visibility: visible;
     padding: 10px 16px 18px;
   }
 
-  .dopaway-mobile-menu__nav {
+  .mindup-mobile-menu__nav {
     display: flex;
     flex-direction: column;
     gap: 10px;
     padding: 8px 0 16px;
   }
 
-  .dopaway-mobile-menu__link {
+  .mindup-mobile-menu__link {
     display: flex;
     align-items: center;
     min-height: 52px;
     padding: 0 18px;
     border-radius: 18px;
-    background: rgba(0, 0, 0, 0.06);
-    color: #000000;
+    background: rgba(var(--ink-rgb), 0.06);
+    color: var(--text-main);
     font-size: 1rem;
     font-weight: 600;
     line-height: 1;
     transition: background 0.2s ease, transform 0.2s ease;
   }
 
-  .dopaway-mobile-menu__link:hover {
-    background: rgba(0, 0, 0, 0.1);
+  .mindup-mobile-menu__link:hover {
+    background: rgba(var(--ink-rgb), 0.1);
     transform: translateX(2px);
   }
 
-  .dopaway-mobile-menu__actions {
+  .mindup-mobile-menu__actions {
     padding-top: 4px;
   }
 
-  .dopaway-mobile-menu__button {
+  .mindup-mobile-menu__button {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     width: 100%;
     min-height: 56px;
     padding: 0 24px;
+    border: 1px solid var(--line);
     border-radius: 999px;
-    background: #000000;
-    color: #ffffff;
+    background: var(--bg-main);
+    color: var(--text-main);
     font-size: 1rem;
     font-weight: 600;
     line-height: 1;
@@ -568,20 +731,20 @@ a {
 ========================= */
 
 @media (max-width: 1024px) {
-  .dopaway-header__container {
+  .mindup-header__container {
     width: min(100% - 40px, 1440px);
     column-gap: 24px;
   }
 
-  .dopaway-header__logo {
+  .mindup-header__logo {
     height: 46px;
   }
 
-  .dopaway-header__nav {
+  .mindup-header__nav {
     gap: 20px;
   }
 
-  .dopaway-header__button {
+  .mindup-header__button {
     min-width: 200px;
     height: 56px;
     padding: 0 28px;
@@ -589,54 +752,54 @@ a {
 }
 
 @media (max-width: 900px) {
-  .dopaway-header__container {
+  .mindup-header__container {
     min-height: 84px;
     grid-template-columns: auto 1fr auto;
   }
 
-  .dopaway-header__nav {
+  .mindup-header__nav {
     display: none;
   }
 
-  .dopaway-header__button {
+  .mindup-header__button {
     display: none;
   }
 
-  .dopaway-header__menu-toggle {
+  .mindup-header__menu-toggle {
     display: inline-flex;
   }
 }
 
 @media (max-width: 768px) {
-  .dopaway-header__container {
+  .mindup-header__container {
     width: min(100% - 24px, 1440px);
   }
 
-  .dopaway-header__logo {
+  .mindup-header__logo {
     height: 40px;
   }
 }
 
 @media (max-width: 480px) {
-  .dopaway-header__container {
+  .mindup-header__container {
     min-height: 78px;
   }
 
-  .dopaway-header__logo {
+  .mindup-header__logo {
     height: 34px;
   }
 
-  .dopaway-header__menu-toggle {
+  .mindup-header__menu-toggle {
     width: 48px;
     height: 48px;
   }
 
-  .dopaway-mobile-menu__link {
+  .mindup-mobile-menu__link {
     min-height: 50px;
     padding: 0 16px;
   }
 
-  .dopaway-mobile-menu__button {
+  .mindup-mobile-menu__button {
     min-height: 54px;
   }
 }
@@ -645,9 +808,9 @@ a {
    HIGHLIGHT SECTION
 ========================= */
 
-.dopaway-highlight-section {
+.mindup-highlight-section {
   padding: 88px 0;
-  background: #000000;
+  background: var(--bg-main);
 }
 
 
@@ -655,7 +818,7 @@ a {
    HIGHLIGHT CONTAINER
 ========================= */
 
-.dopaway-highlight-section__container {
+.mindup-highlight-section__container {
   width: min(1440px, calc(100% - 120px));
   margin: 0 auto;
   display: grid;
@@ -669,19 +832,19 @@ a {
    HIGHLIGHT VISUAL
 ========================= */
 
-.dopaway-highlight-section__visual {
+.mindup-highlight-section__visual {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.dopaway-highlight-section__image-wrap {
+.mindup-highlight-section__image-wrap {
   position: relative;
   width: min(100%, 420px);
   aspect-ratio: 1 / 1.12;
 }
 
-.dopaway-highlight-section__image {
+.mindup-highlight-section__image {
   object-fit: contain;
   object-position: center;
 }
@@ -691,33 +854,33 @@ a {
    HIGHLIGHT COPY
 ========================= */
 
-.dopaway-highlight-section__copy {
+.mindup-highlight-section__copy {
   max-width: 760px;
 }
 
-.dopaway-highlight-section__eyebrow {
+.mindup-highlight-section__eyebrow {
   display: inline-block;
   margin-bottom: 14px;
-  color: #ffc700;
+  color: var(--accent-blue);
   font-size: 0.95rem;
   font-weight: 600;
   line-height: 1.4;
-  letter-spacing: -0.01em;
+  letter-spacing: 0;
 }
 
-.dopaway-highlight-section__title {
+.mindup-highlight-section__title {
   margin: 0;
-  color: #ffffff;
+  color: var(--text-main);
   font-size: 48px;
   line-height: 0.98;
   font-weight: 800;
-  letter-spacing: -0.05em;
+  letter-spacing: 0;
 }
 
-.dopaway-highlight-section__description {
+.mindup-highlight-section__description {
   margin: 22px 0 0;
   max-width: 640px;
-  color: rgba(255, 255, 255, 0.82);
+  color: rgba(var(--ink-rgb), 0.82);
   font-size: 1.08rem;
   line-height: 1.75;
 }
@@ -727,7 +890,7 @@ a {
    HIGHLIGHT LIST
 ========================= */
 
-.dopaway-highlight-section__list {
+.mindup-highlight-section__list {
   list-style: none;
   margin: 34px 0 0;
   padding: 0;
@@ -735,25 +898,25 @@ a {
   gap: 18px;
 }
 
-.dopaway-highlight-section__item {
+.mindup-highlight-section__item {
   display: flex;
   align-items: flex-start;
   gap: 14px;
-  color: #ffffff;
+  color: var(--text-main);
   font-size: 1.02rem;
   line-height: 1.6;
   font-weight: 500;
 }
 
-.dopaway-highlight-section__icon {
+.mindup-highlight-section__icon {
   width: 22px;
   height: 22px;
   flex: 0 0 22px;
-  color: #ffc700;
+  color: var(--accent-blue);
   margin-top: 2px;
 }
 
-.dopaway-highlight-section__icon svg {
+.mindup-highlight-section__icon svg {
   width: 100%;
   height: 100%;
   display: block;
@@ -765,61 +928,61 @@ a {
 ========================= */
 
 @media (max-width: 1100px) {
-  .dopaway-highlight-section {
+  .mindup-highlight-section {
     padding: 72px 0;
   }
 
-  .dopaway-highlight-section__container {
+  .mindup-highlight-section__container {
     width: min(100% - 48px, 1440px);
     grid-template-columns: 1fr;
     gap: 42px;
   }
 
-  .dopaway-highlight-section__copy {
+  .mindup-highlight-section__copy {
     max-width: 100%;
   }
 
-  .dopaway-highlight-section__description {
+  .mindup-highlight-section__description {
     max-width: 100%;
   }
 
-  .dopaway-highlight-section__image-wrap {
+  .mindup-highlight-section__image-wrap {
     width: min(100%, 340px);
   }
 }
 
 @media (max-width: 768px) {
-  .dopaway-highlight-section {
+  .mindup-highlight-section {
     padding: 56px 0;
   }
 
-  .dopaway-highlight-section__container {
+  .mindup-highlight-section__container {
     width: min(100% - 32px, 1440px);
     gap: 28px;
   }
 
-  .dopaway-highlight-section__title {
+  .mindup-highlight-section__title {
     font-size: 2rem;
     line-height: 1;
   }
 
-  .dopaway-highlight-section__description {
+  .mindup-highlight-section__description {
     margin-top: 18px;
     font-size: 0.98rem;
     line-height: 1.68;
   }
 
-  .dopaway-highlight-section__list {
+  .mindup-highlight-section__list {
     margin-top: 26px;
     gap: 14px;
   }
 
-  .dopaway-highlight-section__item {
+  .mindup-highlight-section__item {
     font-size: 0.96rem;
     line-height: 1.55;
   }
 
-  .dopaway-highlight-section__image-wrap {
+  .mindup-highlight-section__image-wrap {
     width: min(100%, 280px);
   }
 }
@@ -828,9 +991,9 @@ a {
    BENEFITS SECTION
 ========================= */
 
-.dopaway-benefits-section {
+.mindup-benefits-section {
   padding: 88px 0;
-  background: #000000;
+  background: var(--bg-main);
 }
 
 
@@ -838,7 +1001,7 @@ a {
    BENEFITS CONTAINER
 ========================= */
 
-.dopaway-benefits-section__container {
+.mindup-benefits-section__container {
   width: min(1440px, calc(100% - 120px));
   margin: 0 auto;
 }
@@ -848,34 +1011,34 @@ a {
    BENEFITS HEAD
 ========================= */
 
-.dopaway-benefits-section__head {
+.mindup-benefits-section__head {
   max-width: 820px;
   margin-bottom: 42px;
 }
 
-.dopaway-benefits-section__eyebrow {
+.mindup-benefits-section__eyebrow {
   display: inline-block;
   margin-bottom: 14px;
-  color: #ffc700;
+  color: var(--accent-blue);
   font-size: 0.95rem;
   font-weight: 600;
   line-height: 1.4;
-  letter-spacing: -0.01em;
+  letter-spacing: 0;
 }
 
-.dopaway-benefits-section__title {
+.mindup-benefits-section__title {
   margin: 0;
-  color: #ffffff;
+  color: var(--text-main);
   font-size: 46px;
   line-height: 0.98;
   font-weight: 800;
-  letter-spacing: -0.05em;
+  letter-spacing: 0;
 }
 
-.dopaway-benefits-section__subtitle {
+.mindup-benefits-section__subtitle {
   margin: 20px 0 0;
   max-width: 700px;
-  color: rgba(255, 255, 255, 0.82);
+  color: rgba(var(--ink-rgb), 0.82);
   font-size: 1.06rem;
   line-height: 1.75;
 }
@@ -885,7 +1048,7 @@ a {
    BENEFITS GRID
 ========================= */
 
-.dopaway-benefits-section__grid {
+.mindup-benefits-section__grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 22px;
@@ -896,19 +1059,15 @@ a {
    BENEFITS CARD
 ========================= */
 
-.dopaway-benefits-section__card {
+.mindup-benefits-section__card {
   min-height: 260px;
   padding: 28px 24px;
-  border: 1px solid rgba(255, 199, 0, 0.16);
+  border: 1px solid rgba(var(--brand-primary-rgb), 0.16);
   border-radius: 28px;
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.02) 0%,
-    rgba(255, 255, 255, 0.01) 100%
-  );
+  background: var(--surface);
 }
 
-.dopaway-benefits-section__card-icon {
+.mindup-benefits-section__card-icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -916,28 +1075,28 @@ a {
   height: 42px;
   margin-bottom: 22px;
   border-radius: 999px;
-  background: rgba(255, 199, 0, 0.1);
-  color: #ffc700;
+  background: rgba(var(--brand-primary-rgb), 0.1);
+  color: var(--accent-blue);
 }
 
-.dopaway-benefits-section__card-icon svg {
+.mindup-benefits-section__card-icon svg {
   width: 22px;
   height: 22px;
   display: block;
 }
 
-.dopaway-benefits-section__card-title {
+.mindup-benefits-section__card-title {
   margin: 0;
-  color: #ffffff;
+  color: var(--text-main);
   font-size: 1.28rem;
   line-height: 1.08;
   font-weight: 700;
-  letter-spacing: -0.03em;
+  letter-spacing: 0;
 }
 
-.dopaway-benefits-section__card-description {
+.mindup-benefits-section__card-description {
   margin: 16px 0 0;
-  color: rgba(255, 255, 255, 0.78);
+  color: rgba(var(--ink-rgb), 0.78);
   font-size: 0.98rem;
   line-height: 1.7;
 }
@@ -948,54 +1107,54 @@ a {
 ========================= */
 
 @media (max-width: 1200px) {
-  .dopaway-benefits-section__container {
+  .mindup-benefits-section__container {
     width: min(100% - 72px, 1440px);
   }
 
-  .dopaway-benefits-section__grid {
+  .mindup-benefits-section__grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
 @media (max-width: 768px) {
-  .dopaway-benefits-section {
+  .mindup-benefits-section {
     padding: 56px 0;
   }
 
-  .dopaway-benefits-section__container {
+  .mindup-benefits-section__container {
     width: min(100% - 32px, 1440px);
   }
 
-  .dopaway-benefits-section__head {
+  .mindup-benefits-section__head {
     margin-bottom: 28px;
   }
 
-  .dopaway-benefits-section__title {
+  .mindup-benefits-section__title {
     font-size: 2rem;
     line-height: 1;
   }
 
-  .dopaway-benefits-section__subtitle {
+  .mindup-benefits-section__subtitle {
     font-size: 0.98rem;
     line-height: 1.68;
   }
 
-  .dopaway-benefits-section__grid {
+  .mindup-benefits-section__grid {
     grid-template-columns: 1fr;
     gap: 16px;
   }
 
-  .dopaway-benefits-section__card {
+  .mindup-benefits-section__card {
     min-height: auto;
     padding: 24px 20px;
     border-radius: 22px;
   }
 
-  .dopaway-benefits-section__card-title {
+  .mindup-benefits-section__card-title {
     font-size: 1.12rem;
   }
 
-  .dopaway-benefits-section__card-description {
+  .mindup-benefits-section__card-description {
     font-size: 0.95rem;
     line-height: 1.62;
   }
@@ -1005,9 +1164,9 @@ a {
    PERFORMANCE SECTION
 ========================= */
 
-.dopaway-performance-section {
+.mindup-performance-section {
   padding: 88px 0;
-  background: #000000;
+  background: var(--bg-main);
 }
 
 
@@ -1015,7 +1174,7 @@ a {
    PERFORMANCE CONTAINER
 ========================= */
 
-.dopaway-performance-section__container {
+.mindup-performance-section__container {
   width: min(1440px, calc(100% - 120px));
   margin: 0 auto;
 }
@@ -1025,34 +1184,34 @@ a {
    PERFORMANCE HEAD
 ========================= */
 
-.dopaway-performance-section__head {
+.mindup-performance-section__head {
   max-width: 860px;
   margin-bottom: 40px;
 }
 
-.dopaway-performance-section__eyebrow {
+.mindup-performance-section__eyebrow {
   display: inline-block;
   margin-bottom: 14px;
-  color: #ffc700;
+  color: var(--accent-blue);
   font-size: 0.95rem;
   font-weight: 600;
   line-height: 1.4;
-  letter-spacing: -0.01em;
+  letter-spacing: 0;
 }
 
-.dopaway-performance-section__title {
+.mindup-performance-section__title {
   margin: 0;
-  color: #ffffff;
+  color: var(--text-main);
   font-size: 46px;
   line-height: 0.98;
   font-weight: 800;
-  letter-spacing: -0.05em;
+  letter-spacing: 0;
 }
 
-.dopaway-performance-section__subtitle {
+.mindup-performance-section__subtitle {
   margin: 20px 0 0;
   max-width: 720px;
-  color: rgba(255, 255, 255, 0.82);
+  color: rgba(var(--ink-rgb), 0.82);
   font-size: 1.06rem;
   line-height: 1.75;
 }
@@ -1062,7 +1221,7 @@ a {
    PERFORMANCE GRID
 ========================= */
 
-.dopaway-performance-section__grid {
+.mindup-performance-section__grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 22px;
@@ -1073,41 +1232,37 @@ a {
    PERFORMANCE ITEM
 ========================= */
 
-.dopaway-performance-section__item {
+.mindup-performance-section__item {
   display: flex;
   align-items: flex-start;
   gap: 16px;
   min-height: 120px;
   padding: 26px 24px;
-  border: 1px solid rgba(255, 199, 0, 0.16);
+  border: 1px solid rgba(var(--brand-primary-rgb), 0.16);
   border-radius: 24px;
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.02) 0%,
-    rgba(255, 255, 255, 0.01) 100%
-  );
+  background: var(--surface);
 }
 
-.dopaway-performance-section__icon {
+.mindup-performance-section__icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   width: 28px;
   height: 28px;
   flex: 0 0 28px;
-  color: #ffc700;
+  color: var(--accent-blue);
   margin-top: 2px;
 }
 
-.dopaway-performance-section__icon svg {
+.mindup-performance-section__icon svg {
   width: 100%;
   height: 100%;
   display: block;
 }
 
-.dopaway-performance-section__text {
+.mindup-performance-section__text {
   margin: 0;
-  color: #ffffff;
+  color: var(--text-main);
   font-size: 1.02rem;
   line-height: 1.7;
   font-weight: 500;
@@ -1119,53 +1274,242 @@ a {
 ========================= */
 
 @media (max-width: 1200px) {
-  .dopaway-performance-section__container {
+  .mindup-performance-section__container {
     width: min(100% - 72px, 1440px);
   }
 }
 
 @media (max-width: 900px) {
-  .dopaway-performance-section__grid {
+  .mindup-performance-section__grid {
     grid-template-columns: 1fr;
   }
 
-  .dopaway-performance-section__title {
+  .mindup-performance-section__title {
     font-size: 40px;
   }
 }
 
 @media (max-width: 768px) {
-  .dopaway-performance-section {
+  .mindup-performance-section {
     padding: 56px 0;
   }
 
-  .dopaway-performance-section__container {
+  .mindup-performance-section__container {
     width: min(100% - 32px, 1440px);
   }
 
-  .dopaway-performance-section__head {
+  .mindup-performance-section__head {
     margin-bottom: 28px;
   }
 
-  .dopaway-performance-section__title {
+  .mindup-performance-section__title {
     font-size: 32px;
     line-height: 1;
   }
 
-  .dopaway-performance-section__subtitle {
+  .mindup-performance-section__subtitle {
     font-size: 0.98rem;
     line-height: 1.68;
   }
 
-  .dopaway-performance-section__item {
+  .mindup-performance-section__item {
     min-height: auto;
     padding: 22px 18px;
     border-radius: 20px;
   }
 
-  .dopaway-performance-section__text {
+  .mindup-performance-section__text {
     font-size: 0.96rem;
     line-height: 1.6;
+  }
+}
+
+/* =========================
+   COMEBACK SECTION
+========================= */
+
+.mindup-comeback-section {
+  padding: 88px 0;
+  background: var(--bg-main);
+}
+
+.mindup-comeback-section__container {
+  width: min(1440px, calc(100% - 120px));
+  margin: 0 auto;
+  padding: 38px;
+  border: 1px solid var(--line);
+  border-radius: 30px;
+  background: var(--surface-strong);
+}
+
+.mindup-comeback-section__head {
+  max-width: 980px;
+  margin-bottom: 34px;
+}
+
+.mindup-comeback-section__eyebrow {
+  display: inline-block;
+  margin-bottom: 14px;
+  color: var(--accent-blue);
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: 0;
+}
+
+.mindup-comeback-section__title {
+  margin: 0;
+  color: var(--text-main);
+  font-size: 48px;
+  line-height: 0.98;
+  font-weight: 800;
+  letter-spacing: 0;
+}
+
+.mindup-comeback-section__subtitle {
+  margin: 22px 0 0;
+  max-width: 840px;
+  color: rgba(var(--ink-rgb), 0.82);
+  font-size: 1.08rem;
+  line-height: 1.75;
+}
+
+.mindup-comeback-section__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.mindup-comeback-section__card {
+  min-height: 250px;
+  padding: 26px 24px;
+  border: 1px solid rgba(var(--accent-blue-rgb), 0.16);
+  border-radius: 24px;
+  background: var(--bg-main);
+}
+
+.mindup-comeback-section__number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  margin-bottom: 22px;
+  border-radius: 999px;
+  background: var(--accent-blue);
+  color: var(--paper);
+  font-size: 0.95rem;
+  line-height: 1;
+  font-weight: 800;
+}
+
+.mindup-comeback-section__card-title {
+  margin: 0;
+  color: var(--text-main);
+  font-size: 1.35rem;
+  line-height: 1.12;
+  font-weight: 800;
+  letter-spacing: 0;
+}
+
+.mindup-comeback-section__card-text {
+  margin: 16px 0 0;
+  color: rgba(var(--ink-rgb), 0.8);
+  font-size: 0.98rem;
+  line-height: 1.7;
+}
+
+.mindup-comeback-section__closing {
+  margin-top: 26px;
+  padding-top: 26px;
+  border-top: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.mindup-comeback-section__closing p {
+  margin: 0;
+  max-width: 760px;
+  color: rgba(var(--ink-rgb), 0.82);
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.mindup-comeback-section__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 230px;
+  min-height: 58px;
+  padding: 0 28px;
+  border-radius: 999px;
+  background: var(--brand-primary);
+  color: var(--text-main);
+  font-size: 1rem;
+  font-weight: 800;
+  line-height: 1;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.mindup-comeback-section__button:hover {
+  background: var(--brand-primary-strong);
+  transform: translateY(-1px);
+}
+
+@media (max-width: 1200px) {
+  .mindup-comeback-section__container {
+    width: min(100% - 72px, 1440px);
+  }
+
+  .mindup-comeback-section__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .mindup-comeback-section__card {
+    min-height: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .mindup-comeback-section {
+    padding: 56px 0;
+  }
+
+  .mindup-comeback-section__container {
+    width: min(100% - 32px, 1440px);
+    padding: 26px 20px;
+    border-radius: 24px;
+  }
+
+  .mindup-comeback-section__head {
+    margin-bottom: 26px;
+  }
+
+  .mindup-comeback-section__title {
+    font-size: 32px;
+    line-height: 1;
+  }
+
+  .mindup-comeback-section__subtitle {
+    font-size: 0.98rem;
+    line-height: 1.68;
+  }
+
+  .mindup-comeback-section__card {
+    padding: 22px 18px;
+    border-radius: 20px;
+  }
+
+  .mindup-comeback-section__closing {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .mindup-comeback-section__button {
+    width: 100%;
   }
 }
 
@@ -1173,9 +1517,9 @@ a {
    TESTIMONIALS SECTION
 ========================= */
 
-.dopaway-testimonials-section {
+.mindup-testimonials-section {
   padding: 88px 0;
-  background: #000000;
+  background: var(--bg-main);
 }
 
 
@@ -1183,7 +1527,7 @@ a {
    TESTIMONIALS CONTAINER
 ========================= */
 
-.dopaway-testimonials-section__container {
+.mindup-testimonials-section__container {
   width: min(1440px, calc(100% - 120px));
   margin: 0 auto;
 }
@@ -1193,34 +1537,34 @@ a {
    TESTIMONIALS HEAD
 ========================= */
 
-.dopaway-testimonials-section__head {
+.mindup-testimonials-section__head {
   max-width: 860px;
   margin-bottom: 42px;
 }
 
-.dopaway-testimonials-section__eyebrow {
+.mindup-testimonials-section__eyebrow {
   display: inline-block;
   margin-bottom: 14px;
-  color: #ffc700;
+  color: var(--accent-blue);
   font-size: 0.95rem;
   font-weight: 600;
   line-height: 1.4;
-  letter-spacing: -0.01em;
+  letter-spacing: 0;
 }
 
-.dopaway-testimonials-section__title {
+.mindup-testimonials-section__title {
   margin: 0;
-  color: #ffffff;
+  color: var(--text-main);
   font-size: 46px;
   line-height: 0.98;
   font-weight: 800;
-  letter-spacing: -0.05em;
+  letter-spacing: 0;
 }
 
-.dopaway-testimonials-section__subtitle {
+.mindup-testimonials-section__subtitle {
   margin: 20px 0 0;
   max-width: 720px;
-  color: rgba(255, 255, 255, 0.82);
+  color: rgba(var(--ink-rgb), 0.82);
   font-size: 1.06rem;
   line-height: 1.75;
 }
@@ -1230,7 +1574,7 @@ a {
    TESTIMONIALS GRID
 ========================= */
 
-.dopaway-testimonials-section__grid {
+.mindup-testimonials-section__grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 22px;
@@ -1241,43 +1585,39 @@ a {
    TESTIMONIALS CARD
 ========================= */
 
-.dopaway-testimonials-section__card {
+.mindup-testimonials-section__card {
   position: relative;
   min-height: 280px;
   padding: 30px 26px 26px;
-  border: 1px solid rgba(255, 199, 0, 0.16);
+  border: 1px solid rgba(var(--brand-primary-rgb), 0.16);
   border-radius: 28px;
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.02) 0%,
-    rgba(255, 255, 255, 0.01) 100%
-  );
+  background: var(--surface);
 }
 
-.dopaway-testimonials-section__quote {
+.mindup-testimonials-section__quote {
   display: inline-block;
   margin-bottom: 18px;
-  color: #ffc700;
+  color: var(--accent-blue);
   font-size: 3rem;
   line-height: 0.8;
   font-weight: 700;
 }
 
-.dopaway-testimonials-section__text {
+.mindup-testimonials-section__text {
   margin: 0;
-  color: rgba(255, 255, 255, 0.84);
+  color: rgba(var(--ink-rgb), 0.84);
   font-size: 1rem;
   line-height: 1.78;
 }
 
-.dopaway-testimonials-section__name {
+.mindup-testimonials-section__name {
   display: inline-block;
   margin-top: 26px;
-  color: #ffffff;
+  color: var(--text-main);
   font-size: 1rem;
   line-height: 1.2;
   font-weight: 700;
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
 }
 
 
@@ -1286,58 +1626,58 @@ a {
 ========================= */
 
 @media (max-width: 1200px) {
-  .dopaway-testimonials-section__container {
+  .mindup-testimonials-section__container {
     width: min(100% - 72px, 1440px);
   }
 
-  .dopaway-testimonials-section__grid {
+  .mindup-testimonials-section__grid {
     grid-template-columns: 1fr;
   }
 
-  .dopaway-testimonials-section__card {
+  .mindup-testimonials-section__card {
     min-height: auto;
   }
 }
 
 @media (max-width: 768px) {
-  .dopaway-testimonials-section {
+  .mindup-testimonials-section {
     padding: 56px 0;
   }
 
-  .dopaway-testimonials-section__container {
+  .mindup-testimonials-section__container {
     width: min(100% - 32px, 1440px);
   }
 
-  .dopaway-testimonials-section__head {
+  .mindup-testimonials-section__head {
     margin-bottom: 28px;
   }
 
-  .dopaway-testimonials-section__title {
+  .mindup-testimonials-section__title {
     font-size: 32px;
     line-height: 1;
   }
 
-  .dopaway-testimonials-section__subtitle {
+  .mindup-testimonials-section__subtitle {
     font-size: 0.98rem;
     line-height: 1.68;
   }
 
-  .dopaway-testimonials-section__card {
+  .mindup-testimonials-section__card {
     padding: 24px 20px 22px;
     border-radius: 22px;
   }
 
-  .dopaway-testimonials-section__quote {
+  .mindup-testimonials-section__quote {
     margin-bottom: 14px;
     font-size: 2.5rem;
   }
 
-  .dopaway-testimonials-section__text {
+  .mindup-testimonials-section__text {
     font-size: 0.96rem;
     line-height: 1.68;
   }
 
-  .dopaway-testimonials-section__name {
+  .mindup-testimonials-section__name {
     margin-top: 20px;
     font-size: 0.95rem;
   }
@@ -1347,9 +1687,9 @@ a {
    COMPLIANCE SECTION
 ========================= */
 
-.dopaway-compliance-section {
+.mindup-compliance-section {
   padding: 88px 0;
-  background: #000000;
+  background: var(--bg-main);
 }
 
 
@@ -1357,7 +1697,7 @@ a {
    COMPLIANCE CONTAINER
 ========================= */
 
-.dopaway-compliance-section__container {
+.mindup-compliance-section__container {
   width: min(1440px, calc(100% - 120px));
   margin: 0 auto;
   display: grid;
@@ -1365,13 +1705,9 @@ a {
   align-items: center;
   gap: 42px;
   padding: 34px 38px;
-  border: 1px solid rgba(255, 199, 0, 0.16);
+  border: 1px solid rgba(var(--brand-primary-rgb), 0.16);
   border-radius: 30px;
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.02) 0%,
-    rgba(255, 255, 255, 0.01) 100%
-  );
+  background: var(--surface);
 }
 
 
@@ -1379,22 +1715,22 @@ a {
    COMPLIANCE BADGE
 ========================= */
 
-.dopaway-compliance-section__badge {
+.mindup-compliance-section__badge {
   display: flex;
   align-items: center;
   justify-content: center;
   min-height: 160px;
   border-radius: 24px;
-  border: 1px solid rgba(255, 199, 0, 0.22);
-  background: rgba(255, 199, 0, 0.04);
+  border: 1px solid rgba(var(--brand-primary-rgb), 0.22);
+  background: rgba(var(--brand-primary-rgb), 0.04);
 }
 
-.dopaway-compliance-section__badge span {
-  color: #ffc700;
+.mindup-compliance-section__badge span {
+  color: var(--accent-blue);
   font-size: 2.2rem;
   line-height: 1;
   font-weight: 800;
-  letter-spacing: -0.05em;
+  letter-spacing: 0;
 }
 
 
@@ -1402,33 +1738,33 @@ a {
    COMPLIANCE COPY
 ========================= */
 
-.dopaway-compliance-section__copy {
+.mindup-compliance-section__copy {
   max-width: 860px;
 }
 
-.dopaway-compliance-section__eyebrow {
+.mindup-compliance-section__eyebrow {
   display: inline-block;
   margin-bottom: 14px;
-  color: #ffc700;
+  color: var(--accent-blue);
   font-size: 0.95rem;
   font-weight: 600;
   line-height: 1.4;
-  letter-spacing: -0.01em;
+  letter-spacing: 0;
 }
 
-.dopaway-compliance-section__title {
+.mindup-compliance-section__title {
   margin: 0;
-  color: #ffffff;
+  color: var(--text-main);
   font-size: 46px;
   line-height: 0.98;
   font-weight: 800;
-  letter-spacing: -0.05em;
+  letter-spacing: 0;
 }
 
-.dopaway-compliance-section__description {
+.mindup-compliance-section__description {
   margin: 20px 0 0;
   max-width: 720px;
-  color: rgba(255, 255, 255, 0.82);
+  color: rgba(var(--ink-rgb), 0.82);
   font-size: 1.06rem;
   line-height: 1.75;
 }
@@ -1439,55 +1775,55 @@ a {
 ========================= */
 
 @media (max-width: 1200px) {
-  .dopaway-compliance-section__container {
+  .mindup-compliance-section__container {
     width: min(100% - 72px, 1440px);
     grid-template-columns: 190px minmax(0, 1fr);
     gap: 30px;
   }
 
-  .dopaway-compliance-section__title {
+  .mindup-compliance-section__title {
     font-size: 40px;
   }
 }
 
 @media (max-width: 900px) {
-  .dopaway-compliance-section__container {
+  .mindup-compliance-section__container {
     grid-template-columns: 1fr;
     padding: 28px 24px;
   }
 
-  .dopaway-compliance-section__badge {
+  .mindup-compliance-section__badge {
     min-height: 120px;
   }
 }
 
 @media (max-width: 768px) {
-  .dopaway-compliance-section {
+  .mindup-compliance-section {
     padding: 56px 0;
   }
 
-  .dopaway-compliance-section__container {
+  .mindup-compliance-section__container {
     width: min(100% - 32px, 1440px);
     gap: 22px;
     padding: 22px 18px;
     border-radius: 22px;
   }
 
-  .dopaway-compliance-section__badge {
+  .mindup-compliance-section__badge {
     min-height: 94px;
     border-radius: 18px;
   }
 
-  .dopaway-compliance-section__badge span {
+  .mindup-compliance-section__badge span {
     font-size: 1.8rem;
   }
 
-  .dopaway-compliance-section__title {
+  .mindup-compliance-section__title {
     font-size: 32px;
     line-height: 1;
   }
 
-  .dopaway-compliance-section__description {
+  .mindup-compliance-section__description {
     font-size: 0.98rem;
     line-height: 1.68;
   }
@@ -1497,9 +1833,9 @@ a {
    OFFERS SECTION
 ========================= */
 
-.dopaway-offers-section {
+.mindup-offers-section {
   padding: 88px 0;
-  background: #000000;
+  background: var(--bg-main);
 }
 
 
@@ -1507,7 +1843,7 @@ a {
    OFFERS CONTAINER
 ========================= */
 
-.dopaway-offers-section__container {
+.mindup-offers-section__container {
   width: min(1440px, calc(100% - 120px));
   margin: 0 auto;
 }
@@ -1517,35 +1853,35 @@ a {
    OFFERS HEAD
 ========================= */
 
-.dopaway-offers-section__head {
+.mindup-offers-section__head {
   max-width: 860px;
   margin-bottom: 42px;
 }
 
-.dopaway-offers-section__eyebrow {
+.mindup-offers-section__eyebrow {
   display: inline-block;
   margin-bottom: 14px;
-  color: #ffc700;
+  color: var(--accent-blue);
   font-size: 0.95rem;
   font-weight: 600;
   line-height: 1.4;
-  letter-spacing: -0.01em;
+  letter-spacing: 0;
 }
 
-.dopaway-offers-section__title {
+.mindup-offers-section__title {
   margin: 0;
-  color: #ffffff;
+  color: var(--text-main);
   font-size: 46px;
   line-height: 0.98;
   font-weight: 800;
-  letter-spacing: -0.05em;
+  letter-spacing: 0;
   max-width: 860px;
 }
 
-.dopaway-offers-section__subtitle {
+.mindup-offers-section__subtitle {
   margin: 20px 0 0;
   max-width: 720px;
-  color: rgba(255, 255, 255, 0.82);
+  color: rgba(var(--ink-rgb), 0.82);
   font-size: 1.06rem;
   line-height: 1.75;
 }
@@ -1555,7 +1891,7 @@ a {
    OFFERS GRID
 ========================= */
 
-.dopaway-offers-section__grid {
+.mindup-offers-section__grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 22px;
@@ -1566,31 +1902,23 @@ a {
    OFFERS CARD
 ========================= */
 
-.dopaway-offers-section__card {
+.mindup-offers-section__card {
   position: relative;
   display: flex;
   flex-direction: column;
   min-height: 420px;
   padding: 28px 24px 24px;
-  border: 1px solid rgba(255, 199, 0, 0.14);
+  border: 1px solid rgba(var(--brand-primary-rgb), 0.14);
   border-radius: 28px;
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.02) 0%,
-    rgba(255, 255, 255, 0.01) 100%
-  );
+  background: var(--surface);
 }
 
-.dopaway-offers-section__card.is-featured {
-  border-color: rgba(255, 199, 0, 0.3);
-  background: linear-gradient(
-    180deg,
-    rgba(255, 199, 0, 0.06) 0%,
-    rgba(255, 255, 255, 0.02) 100%
-  );
+.mindup-offers-section__card.is-featured {
+  border-color: rgba(var(--brand-primary-rgb), 0.3);
+  background: var(--surface-strong);
 }
 
-.dopaway-offers-section__tag {
+.mindup-offers-section__tag {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -1598,26 +1926,26 @@ a {
   padding: 0 14px;
   margin-bottom: 20px;
   border-radius: 999px;
-  background: #ffc700;
-  color: #000000;
+  background: var(--brand-primary);
+  color: var(--text-main);
   font-size: 0.84rem;
   font-weight: 700;
   line-height: 1;
   width: fit-content;
 }
 
-.dopaway-offers-section__card-title {
+.mindup-offers-section__card-title {
   margin: 0;
-  color: #ffffff;
+  color: var(--text-main);
   font-size: 1.5rem;
   line-height: 1;
   font-weight: 800;
-  letter-spacing: -0.04em;
+  letter-spacing: 0;
 }
 
-.dopaway-offers-section__card-subtitle {
+.mindup-offers-section__card-subtitle {
   margin: 14px 0 0;
-  color: rgba(255, 255, 255, 0.76);
+  color: rgba(var(--ink-rgb), 0.76);
   font-size: 0.97rem;
   line-height: 1.65;
   min-height: 78px;
@@ -1628,37 +1956,37 @@ a {
    OFFERS PRICES
 ========================= */
 
-.dopaway-offers-section__prices {
+.mindup-offers-section__prices {
   margin-top: 24px;
 }
 
-.dopaway-offers-section__old-price {
+.mindup-offers-section__old-price {
   margin: 0;
-  color: rgba(255, 255, 255, 0.4);
+  color: rgba(var(--ink-rgb), 0.4);
   font-size: 1rem;
   line-height: 1.2;
   text-decoration: line-through;
 }
 
-.dopaway-offers-section__new-price {
+.mindup-offers-section__new-price {
   margin: 10px 0 0;
-  color: #ffffff;
+  color: var(--text-main);
   font-size: 2.1rem;
   line-height: 1;
   font-weight: 800;
-  letter-spacing: -0.05em;
+  letter-spacing: 0;
 }
 
-.dopaway-offers-section__installments {
+.mindup-offers-section__installments {
   margin: 12px 0 0;
-  color: rgba(255, 255, 255, 0.82);
+  color: rgba(var(--ink-rgb), 0.82);
   font-size: 0.96rem;
   line-height: 1.5;
 }
 
-.dopaway-offers-section__unit-price {
+.mindup-offers-section__unit-price {
   margin: 8px 0 0;
-  color: #ffc700;
+  color: var(--accent-blue);
   font-size: 0.95rem;
   line-height: 1.4;
   font-weight: 600;
@@ -1669,7 +1997,7 @@ a {
    OFFERS BUTTON
 ========================= */
 
-.dopaway-offers-section__button {
+.mindup-offers-section__button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -1678,16 +2006,16 @@ a {
   margin-top: auto;
   padding: 0 20px;
   border-radius: 999px;
-  background: #ffc700;
-  color: #000000;
+  background: var(--brand-primary);
+  color: var(--text-main);
   font-size: 1rem;
   font-weight: 700;
   line-height: 1;
   transition: background 0.2s ease, transform 0.2s ease;
 }
 
-.dopaway-offers-section__button:hover {
-  background: #ffd42a;
+.mindup-offers-section__button:hover {
+  background: var(--brand-primary-strong);
   transform: translateY(-1px);
 }
 
@@ -1697,64 +2025,64 @@ a {
 ========================= */
 
 @media (max-width: 1200px) {
-  .dopaway-offers-section__container {
+  .mindup-offers-section__container {
     width: min(100% - 72px, 1440px);
   }
 
-  .dopaway-offers-section__grid {
+  .mindup-offers-section__grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
 @media (max-width: 768px) {
-  .dopaway-offers-section {
+  .mindup-offers-section {
     padding: 56px 0;
   }
 
-  .dopaway-offers-section__container {
+  .mindup-offers-section__container {
     width: min(100% - 32px, 1440px);
   }
 
-  .dopaway-offers-section__head {
+  .mindup-offers-section__head {
     margin-bottom: 28px;
   }
 
-  .dopaway-offers-section__title {
+  .mindup-offers-section__title {
     font-size: 32px;
     line-height: 1;
   }
 
-  .dopaway-offers-section__subtitle {
+  .mindup-offers-section__subtitle {
     font-size: 0.98rem;
     line-height: 1.68;
   }
 
-  .dopaway-offers-section__grid {
+  .mindup-offers-section__grid {
     grid-template-columns: 1fr;
     gap: 16px;
   }
 
-  .dopaway-offers-section__card {
+  .mindup-offers-section__card {
     min-height: auto;
     padding: 24px 20px 20px;
     border-radius: 22px;
   }
 
-  .dopaway-offers-section__card-title {
+  .mindup-offers-section__card-title {
     font-size: 1.3rem;
   }
 
-  .dopaway-offers-section__card-subtitle {
+  .mindup-offers-section__card-subtitle {
     min-height: auto;
     font-size: 0.94rem;
     line-height: 1.6;
   }
 
-  .dopaway-offers-section__new-price {
+  .mindup-offers-section__new-price {
     font-size: 1.85rem;
   }
 
-  .dopaway-offers-section__button {
+  .mindup-offers-section__button {
     min-height: 54px;
   }
 }
@@ -1763,9 +2091,9 @@ a {
    WARRANTY SECTION
 ========================= */
 
-.dopaway-warranty-section {
+.mindup-warranty-section {
   padding: 88px 0;
-  background: #000000;
+  background: var(--bg-main);
 }
 
 
@@ -1773,7 +2101,7 @@ a {
    WARRANTY CONTAINER
 ========================= */
 
-.dopaway-warranty-section__container {
+.mindup-warranty-section__container {
   width: min(1440px, calc(100% - 120px));
   margin: 0 auto;
   display: grid;
@@ -1781,13 +2109,9 @@ a {
   align-items: center;
   gap: 40px;
   padding: 34px 38px;
-  border: 1px solid rgba(255, 199, 0, 0.16);
+  border: 1px solid rgba(var(--brand-primary-rgb), 0.16);
   border-radius: 30px;
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.02) 0%,
-    rgba(255, 255, 255, 0.01) 100%
-  );
+  background: var(--surface);
 }
 
 
@@ -1795,22 +2119,22 @@ a {
    WARRANTY NUMBER
 ========================= */
 
-.dopaway-warranty-section__number {
+.mindup-warranty-section__number {
   display: flex;
   align-items: center;
   justify-content: center;
   min-height: 180px;
   border-radius: 26px;
-  border: 1px solid rgba(255, 199, 0, 0.2);
-  background: rgba(255, 199, 0, 0.04);
+  border: 1px solid rgba(var(--brand-primary-rgb), 0.2);
+  background: rgba(var(--brand-primary-rgb), 0.04);
 }
 
-.dopaway-warranty-section__number span {
-  color: #ffc700;
+.mindup-warranty-section__number span {
+  color: var(--accent-blue);
   font-size: 5rem;
   line-height: 1;
   font-weight: 800;
-  letter-spacing: -0.08em;
+  letter-spacing: 0;
 }
 
 
@@ -1818,33 +2142,33 @@ a {
    WARRANTY COPY
 ========================= */
 
-.dopaway-warranty-section__copy {
+.mindup-warranty-section__copy {
   max-width: 860px;
 }
 
-.dopaway-warranty-section__eyebrow {
+.mindup-warranty-section__eyebrow {
   display: inline-block;
   margin-bottom: 14px;
-  color: #ffc700;
+  color: var(--accent-blue);
   font-size: 0.95rem;
   font-weight: 600;
   line-height: 1.4;
-  letter-spacing: -0.01em;
+  letter-spacing: 0;
 }
 
-.dopaway-warranty-section__title {
+.mindup-warranty-section__title {
   margin: 0;
-  color: #ffffff;
+  color: var(--text-main);
   font-size: 46px;
   line-height: 0.98;
   font-weight: 800;
-  letter-spacing: -0.05em;
+  letter-spacing: 0;
 }
 
-.dopaway-warranty-section__description {
+.mindup-warranty-section__description {
   margin: 20px 0 0;
   max-width: 720px;
-  color: rgba(255, 255, 255, 0.82);
+  color: rgba(var(--ink-rgb), 0.82);
   font-size: 1.06rem;
   line-height: 1.75;
 }
@@ -1855,59 +2179,59 @@ a {
 ========================= */
 
 @media (max-width: 1200px) {
-  .dopaway-warranty-section__container {
+  .mindup-warranty-section__container {
     width: min(100% - 72px, 1440px);
     grid-template-columns: 190px minmax(0, 1fr);
     gap: 30px;
   }
 
-  .dopaway-warranty-section__title {
+  .mindup-warranty-section__title {
     font-size: 40px;
   }
 
-  .dopaway-warranty-section__number span {
+  .mindup-warranty-section__number span {
     font-size: 4.4rem;
   }
 }
 
 @media (max-width: 900px) {
-  .dopaway-warranty-section__container {
+  .mindup-warranty-section__container {
     grid-template-columns: 1fr;
     padding: 28px 24px;
   }
 
-  .dopaway-warranty-section__number {
+  .mindup-warranty-section__number {
     min-height: 130px;
   }
 }
 
 @media (max-width: 768px) {
-  .dopaway-warranty-section {
+  .mindup-warranty-section {
     padding: 56px 0;
   }
 
-  .dopaway-warranty-section__container {
+  .mindup-warranty-section__container {
     width: min(100% - 32px, 1440px);
     gap: 22px;
     padding: 22px 18px;
     border-radius: 22px;
   }
 
-  .dopaway-warranty-section__number {
+  .mindup-warranty-section__number {
     min-height: 100px;
     border-radius: 18px;
   }
 
-  .dopaway-warranty-section__number span {
+  .mindup-warranty-section__number span {
     font-size: 3.5rem;
   }
 
-  .dopaway-warranty-section__title {
+  .mindup-warranty-section__title {
     font-size: 32px;
     line-height: 1;
   }
 
-  .dopaway-warranty-section__description {
+  .mindup-warranty-section__description {
     font-size: 0.98rem;
     line-height: 1.68;
   }
@@ -1917,9 +2241,9 @@ a {
    FAQ SECTION
 ========================= */
 
-.dopaway-faq-section {
+.mindup-faq-section {
   padding: 88px 0;
-  background: #000000;
+  background: var(--bg-main);
 }
 
 
@@ -1927,7 +2251,7 @@ a {
    FAQ CONTAINER
 ========================= */
 
-.dopaway-faq-section__container {
+.mindup-faq-section__container {
   width: min(1440px, calc(100% - 120px));
   margin: 0 auto;
 }
@@ -1937,34 +2261,34 @@ a {
    FAQ HEAD
 ========================= */
 
-.dopaway-faq-section__head {
+.mindup-faq-section__head {
   max-width: 860px;
   margin-bottom: 42px;
 }
 
-.dopaway-faq-section__eyebrow {
+.mindup-faq-section__eyebrow {
   display: inline-block;
   margin-bottom: 14px;
-  color: #ffc700;
+  color: var(--accent-blue);
   font-size: 0.95rem;
   font-weight: 600;
   line-height: 1.4;
-  letter-spacing: -0.01em;
+  letter-spacing: 0;
 }
 
-.dopaway-faq-section__title {
+.mindup-faq-section__title {
   margin: 0;
-  color: #ffffff;
+  color: var(--text-main);
   font-size: 46px;
   line-height: 0.98;
   font-weight: 800;
-  letter-spacing: -0.05em;
+  letter-spacing: 0;
 }
 
-.dopaway-faq-section__subtitle {
+.mindup-faq-section__subtitle {
   margin: 20px 0 0;
   max-width: 720px;
-  color: rgba(255, 255, 255, 0.82);
+  color: rgba(var(--ink-rgb), 0.82);
   font-size: 1.06rem;
   line-height: 1.75;
 }
@@ -1974,7 +2298,7 @@ a {
    FAQ GRID
 ========================= */
 
-.dopaway-faq-section__grid {
+.mindup-faq-section__grid {
   display: grid;
   gap: 16px;
 }
@@ -1984,22 +2308,18 @@ a {
    FAQ ITEM
 ========================= */
 
-.dopaway-faq-section__item {
-  border: 1px solid rgba(255, 199, 0, 0.14);
+.mindup-faq-section__item {
+  border: 1px solid rgba(var(--brand-primary-rgb), 0.14);
   border-radius: 24px;
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.02) 0%,
-    rgba(255, 255, 255, 0.01) 100%
-  );
+  background: var(--surface);
   overflow: hidden;
 }
 
-.dopaway-faq-section__item[open] {
-  border-color: rgba(255, 199, 0, 0.28);
+.mindup-faq-section__item[open] {
+  border-color: rgba(var(--brand-primary-rgb), 0.28);
 }
 
-.dopaway-faq-section__question {
+.mindup-faq-section__question {
   position: relative;
   list-style: none;
   display: flex;
@@ -2009,59 +2329,59 @@ a {
   width: 100%;
   padding: 24px 26px;
   cursor: pointer;
-  color: #ffffff;
+  color: var(--text-main);
   font-size: 1.08rem;
   line-height: 1.4;
   font-weight: 700;
-  letter-spacing: -0.03em;
+  letter-spacing: 0;
 }
 
-.dopaway-faq-section__question::-webkit-details-marker {
+.mindup-faq-section__question::-webkit-details-marker {
   display: none;
 }
 
-.dopaway-faq-section__plus {
+.mindup-faq-section__plus {
   position: relative;
   width: 20px;
   height: 20px;
   flex: 0 0 20px;
 }
 
-.dopaway-faq-section__plus::before,
-.dopaway-faq-section__plus::after {
+.mindup-faq-section__plus::before,
+.mindup-faq-section__plus::after {
   content: "";
   position: absolute;
   top: 50%;
   left: 50%;
-  background: #ffc700;
+  background: var(--brand-primary);
   border-radius: 999px;
   transform: translate(-50%, -50%);
   transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
-.dopaway-faq-section__plus::before {
+.mindup-faq-section__plus::before {
   width: 16px;
   height: 2px;
 }
 
-.dopaway-faq-section__plus::after {
+.mindup-faq-section__plus::after {
   width: 2px;
   height: 16px;
 }
 
-.dopaway-faq-section__item[open] .dopaway-faq-section__plus::after {
+.mindup-faq-section__item[open] .mindup-faq-section__plus::after {
   opacity: 0;
   transform: translate(-50%, -50%) scaleY(0.4);
 }
 
-.dopaway-faq-section__answer-wrap {
+.mindup-faq-section__answer-wrap {
   padding: 0 26px 24px;
 }
 
-.dopaway-faq-section__answer {
+.mindup-faq-section__answer {
   margin: 0;
   max-width: 900px;
-  color: rgba(255, 255, 255, 0.78);
+  color: rgba(var(--ink-rgb), 0.78);
   font-size: 1rem;
   line-height: 1.75;
 }
@@ -2072,53 +2392,53 @@ a {
 ========================= */
 
 @media (max-width: 1200px) {
-  .dopaway-faq-section__container {
+  .mindup-faq-section__container {
     width: min(100% - 72px, 1440px);
   }
 
-  .dopaway-faq-section__title {
+  .mindup-faq-section__title {
     font-size: 40px;
   }
 }
 
 @media (max-width: 768px) {
-  .dopaway-faq-section {
+  .mindup-faq-section {
     padding: 56px 0;
   }
 
-  .dopaway-faq-section__container {
+  .mindup-faq-section__container {
     width: min(100% - 32px, 1440px);
   }
 
-  .dopaway-faq-section__head {
+  .mindup-faq-section__head {
     margin-bottom: 28px;
   }
 
-  .dopaway-faq-section__title {
+  .mindup-faq-section__title {
     font-size: 32px;
     line-height: 1;
   }
 
-  .dopaway-faq-section__subtitle {
+  .mindup-faq-section__subtitle {
     font-size: 0.98rem;
     line-height: 1.68;
   }
 
-  .dopaway-faq-section__item {
+  .mindup-faq-section__item {
     border-radius: 20px;
   }
 
-  .dopaway-faq-section__question {
+  .mindup-faq-section__question {
     padding: 20px 18px;
     font-size: 0.98rem;
     line-height: 1.45;
   }
 
-  .dopaway-faq-section__answer-wrap {
+  .mindup-faq-section__answer-wrap {
     padding: 0 18px 20px;
   }
 
-  .dopaway-faq-section__answer {
+  .mindup-faq-section__answer {
     font-size: 0.94rem;
     line-height: 1.68;
   }
@@ -2128,9 +2448,9 @@ a {
    FINAL CTA SECTION
 ========================= */
 
-.dopaway-final-cta-section {
+.mindup-final-cta-section {
   padding: 88px 0 110px;
-  background: #000000;
+  background: var(--bg-main);
 }
 
 
@@ -2138,17 +2458,13 @@ a {
    FINAL CTA CONTAINER
 ========================= */
 
-.dopaway-final-cta-section__container {
+.mindup-final-cta-section__container {
   width: min(1440px, calc(100% - 120px));
   margin: 0 auto;
   padding: 42px 38px;
-  border: 1px solid rgba(255, 199, 0, 0.16);
+  border: 1px solid rgba(var(--brand-primary-rgb), 0.16);
   border-radius: 32px;
-  background: linear-gradient(
-    180deg,
-    rgba(255, 199, 0, 0.06) 0%,
-    rgba(255, 255, 255, 0.015) 100%
-  );
+  background: var(--surface-strong);
   text-align: center;
 }
 
@@ -2157,30 +2473,30 @@ a {
    FINAL CTA COPY
 ========================= */
 
-.dopaway-final-cta-section__eyebrow {
+.mindup-final-cta-section__eyebrow {
   display: inline-block;
   margin-bottom: 14px;
-  color: #ffc700;
+  color: var(--accent-blue);
   font-size: 0.95rem;
   font-weight: 600;
   line-height: 1.4;
-  letter-spacing: -0.01em;
+  letter-spacing: 0;
 }
 
-.dopaway-final-cta-section__title {
+.mindup-final-cta-section__title {
   max-width: 920px;
   margin: 0 auto;
-  color: #ffffff;
+  color: var(--text-main);
   font-size: 46px;
   line-height: 0.98;
   font-weight: 800;
-  letter-spacing: -0.05em;
+  letter-spacing: 0;
 }
 
-.dopaway-final-cta-section__description {
+.mindup-final-cta-section__description {
   max-width: 720px;
   margin: 20px auto 0;
-  color: rgba(255, 255, 255, 0.82);
+  color: rgba(var(--ink-rgb), 0.82);
   font-size: 1.06rem;
   line-height: 1.75;
 }
@@ -2190,13 +2506,13 @@ a {
    FINAL CTA ACTIONS
 ========================= */
 
-.dopaway-final-cta-section__actions {
+.mindup-final-cta-section__actions {
   display: flex;
   justify-content: center;
   margin-top: 30px;
 }
 
-.dopaway-final-cta-section__button {
+.mindup-final-cta-section__button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -2204,16 +2520,16 @@ a {
   min-height: 60px;
   padding: 0 34px;
   border-radius: 999px;
-  background: #ffc700;
-  color: #000000;
+  background: var(--brand-primary);
+  color: var(--text-main);
   font-size: 1.02rem;
   font-weight: 700;
   line-height: 1;
   transition: background 0.2s ease, transform 0.2s ease;
 }
 
-.dopaway-final-cta-section__button:hover {
-  background: #ffd42a;
+.mindup-final-cta-section__button:hover {
+  background: var(--brand-primary-strong);
   transform: translateY(-1px);
 }
 
@@ -2223,41 +2539,41 @@ a {
 ========================= */
 
 @media (max-width: 1200px) {
-  .dopaway-final-cta-section__container {
+  .mindup-final-cta-section__container {
     width: min(100% - 72px, 1440px);
   }
 
-  .dopaway-final-cta-section__title {
+  .mindup-final-cta-section__title {
     font-size: 40px;
   }
 }
 
 @media (max-width: 768px) {
-  .dopaway-final-cta-section {
+  .mindup-final-cta-section {
     padding: 56px 0 72px;
   }
 
-  .dopaway-final-cta-section__container {
+  .mindup-final-cta-section__container {
     width: min(100% - 32px, 1440px);
     padding: 28px 20px;
     border-radius: 24px;
   }
 
-  .dopaway-final-cta-section__title {
+  .mindup-final-cta-section__title {
     font-size: 32px;
     line-height: 1;
   }
 
-  .dopaway-final-cta-section__description {
+  .mindup-final-cta-section__description {
     font-size: 0.98rem;
     line-height: 1.68;
   }
 
-  .dopaway-final-cta-section__actions {
+  .mindup-final-cta-section__actions {
     margin-top: 24px;
   }
 
-  .dopaway-final-cta-section__button {
+  .mindup-final-cta-section__button {
     width: 100%;
     min-height: 56px;
   }
@@ -2269,7 +2585,7 @@ a {
 
 .landing-footer {
   padding: 32px 0 56px;
-  background: #000000;
+  background: var(--bg-main);
 }
 
 
@@ -2284,11 +2600,11 @@ a {
 .landing-footer p {
   width: min(1440px, calc(100% - 120px));
   margin: 0 auto;
-  color: rgba(255, 255, 255, 0.56);
+  color: rgba(var(--ink-rgb), 0.56);
   font-size: 0.95rem;
   line-height: 1.7;
   text-align: center;
-  border-top: 1px solid rgba(255, 199, 0, 0.12);
+  border-top: 1px solid rgba(var(--brand-primary-rgb), 0.12);
   padding-top: 26px;
 }
 
@@ -2320,46 +2636,42 @@ a {
    CHECKOUT PANEL
 ========================= */
 
-.dopaway-checkout-panel {
+.mindup-checkout-panel {
   width: min(1440px, calc(100% - 120px));
   margin: 0 auto;
   padding: 42px 38px;
-  border: 1px solid rgba(255, 199, 0, 0.14);
+  border: 1px solid rgba(var(--brand-primary-rgb), 0.14);
   border-radius: 32px;
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.02) 0%,
-    rgba(255, 255, 255, 0.01) 100%
-  );
+  background: var(--surface);
 }
 
-.dopaway-checkout-panel__head {
+.mindup-checkout-panel__head {
   max-width: 860px;
   margin-bottom: 32px;
 }
 
-.dopaway-checkout-panel__eyebrow {
+.mindup-checkout-panel__eyebrow {
   display: inline-block;
   margin-bottom: 14px;
-  color: #ffc700;
+  color: var(--accent-blue);
   font-size: 0.95rem;
   font-weight: 600;
   line-height: 1.4;
 }
 
-.dopaway-checkout-panel__title {
+.mindup-checkout-panel__title {
   margin: 0;
-  color: #ffffff;
+  color: var(--text-main);
   font-size: 46px;
   line-height: 0.98;
   font-weight: 800;
-  letter-spacing: -0.05em;
+  letter-spacing: 0;
 }
 
-.dopaway-checkout-panel__subtitle {
+.mindup-checkout-panel__subtitle {
   margin: 18px 0 0;
   max-width: 720px;
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(var(--ink-rgb), 0.8);
   font-size: 1.04rem;
   line-height: 1.75;
 }
@@ -2369,51 +2681,51 @@ a {
    CHECKOUT FORM
 ========================= */
 
-.dopaway-checkout-form {
+.mindup-checkout-form {
   display: grid;
   gap: 18px;
 }
 
-.dopaway-checkout-grid-two {
+.mindup-checkout-grid-two {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 18px;
 }
 
-.dopaway-checkout-field {
+.mindup-checkout-field {
   display: grid;
   gap: 10px;
 }
 
-.dopaway-checkout-field span {
-  color: #ffffff;
+.mindup-checkout-field span {
+  color: var(--text-main);
   font-size: 0.95rem;
   font-weight: 600;
   line-height: 1.3;
 }
 
-.dopaway-checkout-field input,
-.dopaway-checkout-field select {
+.mindup-checkout-field input,
+.mindup-checkout-field select {
   width: 100%;
   min-height: 58px;
   padding: 0 18px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(var(--ink-rgb), 0.08);
   border-radius: 18px;
-  background: #0b0b0b;
-  color: #ffffff;
+  background: var(--surface);
+  color: var(--text-main);
   font-size: 0.98rem;
   outline: none;
   transition: border-color 0.2s ease, background 0.2s ease;
 }
 
-.dopaway-checkout-field input::placeholder {
-  color: rgba(255, 255, 255, 0.38);
+.mindup-checkout-field input::placeholder {
+  color: rgba(var(--ink-rgb), 0.38);
 }
 
-.dopaway-checkout-field input:focus,
-.dopaway-checkout-field select:focus {
-  border-color: rgba(255, 199, 0, 0.45);
-  background: #101010;
+.mindup-checkout-field input:focus,
+.mindup-checkout-field select:focus {
+  border-color: rgba(var(--brand-primary-rgb), 0.45);
+  background: var(--surface-strong);
 }
 
 
@@ -2421,8 +2733,8 @@ a {
    CHECKOUT BUTTONS
 ========================= */
 
-.dopaway-checkout-secondary-button,
-.dopaway-checkout-primary-button {
+.mindup-checkout-secondary-button,
+.mindup-checkout-primary-button {
   min-height: 58px;
   border: none;
   border-radius: 999px;
@@ -2432,28 +2744,28 @@ a {
   transition: transform 0.2s ease, opacity 0.2s ease, background 0.2s ease;
 }
 
-.dopaway-checkout-secondary-button {
-  background: rgba(255, 255, 255, 0.08);
-  color: #ffffff;
+.mindup-checkout-secondary-button {
+  background: rgba(var(--ink-rgb), 0.08);
+  color: var(--text-main);
 }
 
-.dopaway-checkout-secondary-button:hover {
-  background: rgba(255, 255, 255, 0.12);
+.mindup-checkout-secondary-button:hover {
+  background: rgba(var(--ink-rgb), 0.12);
   transform: translateY(-1px);
 }
 
-.dopaway-checkout-primary-button {
-  background: #ffc700;
-  color: #000000;
+.mindup-checkout-primary-button {
+  background: var(--brand-primary);
+  color: var(--text-main);
 }
 
-.dopaway-checkout-primary-button:hover {
-  background: #ffd42a;
+.mindup-checkout-primary-button:hover {
+  background: var(--brand-primary-strong);
   transform: translateY(-1px);
 }
 
-.dopaway-checkout-secondary-button:disabled,
-.dopaway-checkout-primary-button:disabled {
+.mindup-checkout-secondary-button:disabled,
+.mindup-checkout-primary-button:disabled {
   opacity: 0.7;
   cursor: not-allowed;
   transform: none;
@@ -2464,41 +2776,41 @@ a {
    CHECKOUT SUMMARY
 ========================= */
 
-.dopaway-checkout-summary {
+.mindup-checkout-summary {
   margin-top: 8px;
   padding: 22px 22px;
-  border: 1px solid rgba(255, 199, 0, 0.12);
+  border: 1px solid rgba(var(--brand-primary-rgb), 0.12);
   border-radius: 24px;
-  background: rgba(255, 199, 0, 0.03);
+  background: rgba(var(--brand-primary-rgb), 0.03);
 }
 
-.dopaway-checkout-summary__row {
+.mindup-checkout-summary__row {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  color: rgba(255, 255, 255, 0.82);
+  color: rgba(var(--ink-rgb), 0.82);
   font-size: 1rem;
   line-height: 1.5;
 }
 
-.dopaway-checkout-summary__row + .dopaway-checkout-summary__row {
+.mindup-checkout-summary__row + .mindup-checkout-summary__row {
   margin-top: 12px;
 }
 
-.dopaway-checkout-summary__row strong {
-  color: #ffffff;
+.mindup-checkout-summary__row strong {
+  color: var(--text-main);
 }
 
-.dopaway-checkout-summary__row--total {
+.mindup-checkout-summary__row--total {
   margin-top: 16px !important;
   padding-top: 16px;
-  border-top: 1px solid rgba(255, 199, 0, 0.12);
+  border-top: 1px solid rgba(var(--brand-primary-rgb), 0.12);
   font-size: 1.06rem;
 }
 
-.dopaway-checkout-summary__row--total strong {
-  color: #ffc700;
+.mindup-checkout-summary__row--total strong {
+  color: var(--accent-blue);
   font-size: 1.12rem;
 }
 
@@ -2507,12 +2819,12 @@ a {
    CHECKOUT ERROR
 ========================= */
 
-.dopaway-checkout-error {
+.mindup-checkout-error {
   padding: 16px 18px;
   border-radius: 18px;
-  background: rgba(240, 127, 127, 0.12);
-  border: 1px solid rgba(240, 127, 127, 0.24);
-  color: #ffd1d1;
+  background: var(--brand-primary-soft);
+  border: 1px solid var(--line);
+  color: var(--text-main);
   font-size: 0.96rem;
   line-height: 1.6;
 }
@@ -2522,58 +2834,109 @@ a {
    CHECKOUT RESULT
 ========================= */
 
-.dopaway-checkout-result {
+.mindup-checkout-result {
   margin-top: 24px;
   padding: 24px 22px;
-  border: 1px solid rgba(255, 199, 0, 0.16);
+  border: 1px solid rgba(var(--brand-primary-rgb), 0.16);
   border-radius: 24px;
-  background: rgba(255, 199, 0, 0.04);
+  background: rgba(var(--brand-primary-rgb), 0.04);
 }
 
-.dopaway-checkout-result__title {
+.mindup-checkout-result__title {
   margin: 0 0 12px;
-  color: #ffffff;
+  color: var(--text-main);
   font-size: 1.12rem;
   font-weight: 700;
 }
 
-.dopaway-checkout-result__meta {
+.mindup-checkout-result__meta {
   margin: 0;
-  color: rgba(255, 255, 255, 0.82);
+  color: rgba(var(--ink-rgb), 0.82);
   font-size: 0.98rem;
   line-height: 1.7;
 }
 
-.dopaway-checkout-result__meta + .dopaway-checkout-result__meta {
+.mindup-checkout-result__meta + .mindup-checkout-result__meta {
   margin-top: 6px;
 }
 
-.dopaway-checkout-result__links {
+.mindup-checkout-result__links {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
   margin-top: 18px;
 }
 
-.dopaway-checkout-result__links a {
+.mindup-checkout-result__links a {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   min-height: 46px;
   padding: 0 18px;
   border-radius: 999px;
-  background: #ffc700;
-  color: #000000;
+  background: var(--brand-primary);
+  color: var(--text-main);
   font-size: 0.95rem;
   font-weight: 700;
 }
 
-.dopaway-checkout-result__pix {
+.mindup-checkout-result__pix {
   margin: 18px 0 0;
-  color: rgba(255, 255, 255, 0.84);
+  display: grid;
+  gap: 10px;
+  color: rgba(var(--ink-rgb), 0.84);
   font-size: 0.95rem;
   line-height: 1.7;
+}
+
+.mindup-checkout-result__pix span {
+  color: var(--text-main);
+  font-weight: 800;
+}
+
+.mindup-checkout-result__qr {
+  display: grid;
+  place-items: center;
+  width: min(100%, 260px);
+  aspect-ratio: 1;
+  padding: 14px;
+  border: 1px solid rgba(var(--brand-primary-rgb), 0.16);
+  border-radius: 22px;
+  background: #ffffff;
+}
+
+.mindup-checkout-result__qr img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.mindup-checkout-result__pix code {
+  display: block;
+  max-height: 132px;
+  overflow: auto;
+  padding: 14px 14px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--brand-primary-soft);
+  color: var(--text-main);
+  font-family: inherit;
+  font-size: 0.9rem;
+  line-height: 1.55;
   word-break: break-word;
+}
+
+.mindup-checkout-result__pix button {
+  justify-self: start;
+  min-height: 46px;
+  padding: 0 18px;
+  border: none;
+  border-radius: 999px;
+  background: var(--brand-primary);
+  color: var(--text-main);
+  font-size: 0.95rem;
+  font-weight: 800;
+  cursor: pointer;
 }
 
 
@@ -2582,59 +2945,59 @@ a {
 ========================= */
 
 @media (max-width: 1200px) {
-  .dopaway-checkout-panel {
+  .mindup-checkout-panel {
     width: min(100% - 72px, 1440px);
   }
 
-  .dopaway-checkout-panel__title {
+  .mindup-checkout-panel__title {
     font-size: 40px;
   }
 }
 
 @media (max-width: 768px) {
-  .dopaway-checkout-panel {
+  .mindup-checkout-panel {
     width: min(100% - 32px, 1440px);
     padding: 28px 20px;
     border-radius: 24px;
   }
 
-  .dopaway-checkout-panel__title {
+  .mindup-checkout-panel__title {
     font-size: 32px;
     line-height: 1;
   }
 
-  .dopaway-checkout-panel__subtitle {
+  .mindup-checkout-panel__subtitle {
     font-size: 0.98rem;
     line-height: 1.68;
   }
 
-  .dopaway-checkout-grid-two {
+  .mindup-checkout-grid-two {
     grid-template-columns: 1fr;
     gap: 16px;
   }
 
-  .dopaway-checkout-field input,
-  .dopaway-checkout-field select,
-  .dopaway-checkout-secondary-button,
-  .dopaway-checkout-primary-button {
+  .mindup-checkout-field input,
+  .mindup-checkout-field select,
+  .mindup-checkout-secondary-button,
+  .mindup-checkout-primary-button {
     min-height: 54px;
   }
 
-  .dopaway-checkout-summary {
+  .mindup-checkout-summary {
     padding: 18px 16px;
     border-radius: 20px;
   }
 
-  .dopaway-checkout-result {
+  .mindup-checkout-result {
     padding: 20px 16px;
     border-radius: 20px;
   }
 
-  .dopaway-checkout-result__links {
+  .mindup-checkout-result__links {
     flex-direction: column;
   }
 
-  .dopaway-checkout-result__links a {
+  .mindup-checkout-result__links a {
     width: 100%;
   }
 }
@@ -2643,9 +3006,9 @@ a {
    CHECKOUT PAGE
 ========================= */
 
-.dopaway-checkout-page {
+.mindup-checkout-page {
   min-height: 100vh;
-  background: #000000;
+  background: var(--bg-main);
   padding: 0 0 88px;
 }
 
@@ -2654,7 +3017,7 @@ a {
    CHECKOUT TOPBAR
 ========================= */
 
-.dopaway-checkout-topbar {
+.mindup-checkout-topbar {
   width: min(1440px, calc(100% - 120px));
   margin: 0 auto;
   padding: 28px 0 22px;
@@ -2662,31 +3025,31 @@ a {
   align-items: center;
   justify-content: space-between;
   gap: 20px;
-  border-bottom: 1px solid rgba(255, 199, 0, 0.12);
+  border-bottom: 1px solid rgba(var(--brand-primary-rgb), 0.12);
 }
 
-.dopaway-checkout-topbar__back-link {
+.mindup-checkout-topbar__back-link {
   display: inline-flex;
   align-items: center;
   min-height: 46px;
   padding: 0 18px;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.06);
-  color: #ffffff;
+  background: rgba(var(--ink-rgb), 0.06);
+  color: var(--text-main);
   font-size: 0.94rem;
   font-weight: 600;
   line-height: 1;
   transition: background 0.2s ease, transform 0.2s ease;
 }
 
-.dopaway-checkout-topbar__back-link:hover {
-  background: rgba(255, 255, 255, 0.1);
+.mindup-checkout-topbar__back-link:hover {
+  background: rgba(var(--ink-rgb), 0.1);
   transform: translateY(-1px);
 }
 
-.dopaway-checkout-topbar__text {
+.mindup-checkout-topbar__text {
   margin: 0;
-  color: rgba(255, 255, 255, 0.74);
+  color: rgba(var(--ink-rgb), 0.74);
   font-size: 0.95rem;
   line-height: 1.5;
   font-weight: 500;
@@ -2697,7 +3060,7 @@ a {
    CHECKOUT LAYOUT
 ========================= */
 
-.dopaway-checkout-layout {
+.mindup-checkout-layout {
   width: min(1440px, calc(100% - 120px));
   margin: 0 auto;
   display: grid;
@@ -2712,39 +3075,35 @@ a {
    CHECKOUT INTRO
 ========================= */
 
-.dopaway-checkout-intro {
+.mindup-checkout-intro {
   padding: 34px 30px;
-  border: 1px solid rgba(255, 199, 0, 0.14);
+  border: 1px solid rgba(var(--brand-primary-rgb), 0.14);
   border-radius: 30px;
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.02) 0%,
-    rgba(255, 255, 255, 0.01) 100%
-  );
+  background: var(--surface);
 }
 
-.dopaway-checkout-intro__eyebrow {
+.mindup-checkout-intro__eyebrow {
   display: inline-block;
   margin-bottom: 14px;
-  color: #ffc700;
+  color: var(--accent-blue);
   font-size: 0.95rem;
   font-weight: 600;
   line-height: 1.4;
-  letter-spacing: -0.01em;
+  letter-spacing: 0;
 }
 
-.dopaway-checkout-intro__title {
+.mindup-checkout-intro__title {
   margin: 0;
-  color: #ffffff;
+  color: var(--text-main);
   font-size: 46px;
   line-height: 0.98;
   font-weight: 800;
-  letter-spacing: -0.05em;
+  letter-spacing: 0;
 }
 
-.dopaway-checkout-intro__description {
+.mindup-checkout-intro__description {
   margin: 20px 0 0;
-  color: rgba(255, 255, 255, 0.82);
+  color: rgba(var(--ink-rgb), 0.82);
   font-size: 1.04rem;
   line-height: 1.75;
   max-width: 560px;
@@ -2755,32 +3114,32 @@ a {
    CHECKOUT INTRO POINTS
 ========================= */
 
-.dopaway-checkout-intro__points {
+.mindup-checkout-intro__points {
   display: grid;
   gap: 16px;
   margin-top: 30px;
 }
 
-.dopaway-checkout-intro__point {
+.mindup-checkout-intro__point {
   padding: 18px 18px;
-  border: 1px solid rgba(255, 199, 0, 0.12);
+  border: 1px solid rgba(var(--brand-primary-rgb), 0.12);
   border-radius: 22px;
-  background: rgba(255, 199, 0, 0.03);
+  background: rgba(var(--brand-primary-rgb), 0.03);
 }
 
-.dopaway-checkout-intro__point strong {
+.mindup-checkout-intro__point strong {
   display: block;
   margin-bottom: 8px;
-  color: #ffffff;
+  color: var(--text-main);
   font-size: 1rem;
   line-height: 1.2;
   font-weight: 700;
-  letter-spacing: -0.03em;
+  letter-spacing: 0;
 }
 
-.dopaway-checkout-intro__point span {
+.mindup-checkout-intro__point span {
   display: block;
-  color: rgba(255, 255, 255, 0.76);
+  color: rgba(var(--ink-rgb), 0.76);
   font-size: 0.95rem;
   line-height: 1.65;
 }
@@ -2791,74 +3150,327 @@ a {
 ========================= */
 
 @media (max-width: 1200px) {
-  .dopaway-checkout-topbar,
-  .dopaway-checkout-layout {
+  .mindup-checkout-topbar,
+  .mindup-checkout-layout {
     width: min(100% - 72px, 1440px);
   }
 
-  .dopaway-checkout-intro__title {
+  .mindup-checkout-intro__title {
     font-size: 40px;
   }
 }
 
 @media (max-width: 980px) {
-  .dopaway-checkout-layout {
+  .mindup-checkout-layout {
     grid-template-columns: 1fr;
   }
 }
 
 @media (max-width: 768px) {
-  .dopaway-checkout-page {
+  .mindup-checkout-page {
     padding-bottom: 56px;
   }
 
-  .dopaway-checkout-topbar,
-  .dopaway-checkout-layout {
+  .mindup-checkout-topbar,
+  .mindup-checkout-layout {
     width: min(100% - 32px, 1440px);
   }
 
-  .dopaway-checkout-topbar {
+  .mindup-checkout-topbar {
     padding: 22px 0 18px;
     flex-direction: column;
     align-items: flex-start;
   }
 
-  .dopaway-checkout-layout {
+  .mindup-checkout-layout {
     gap: 18px;
     padding-top: 24px;
   }
 
-  .dopaway-checkout-intro {
+  .mindup-checkout-intro {
     padding: 24px 20px;
     border-radius: 24px;
   }
 
-  .dopaway-checkout-intro__title {
+  .mindup-checkout-intro__title {
     font-size: 32px;
     line-height: 1;
   }
 
-  .dopaway-checkout-intro__description {
+  .mindup-checkout-intro__description {
     font-size: 0.98rem;
     line-height: 1.68;
   }
 
-  .dopaway-checkout-intro__points {
+  .mindup-checkout-intro__points {
     margin-top: 24px;
     gap: 12px;
   }
 
-  .dopaway-checkout-intro__point {
+  .mindup-checkout-intro__point {
     padding: 16px 16px;
     border-radius: 18px;
   }
 
-  .dopaway-checkout-intro__point strong {
+  .mindup-checkout-intro__point strong {
     font-size: 0.96rem;
   }
 
-  .dopaway-checkout-intro__point span {
+  .mindup-checkout-intro__point span {
     font-size: 0.92rem;
     line-height: 1.58;
+  }
+}
+
+/* =========================
+   PAYMENT PAGE
+========================= */
+
+.mindup-payment-page {
+  min-height: 100vh;
+  background: var(--bg-main);
+  padding: 0 0 88px;
+}
+
+.mindup-payment-topbar {
+  width: min(1120px, calc(100% - 120px));
+  margin: 0 auto;
+  padding: 28px 0 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  border-bottom: 1px solid rgba(var(--brand-primary-rgb), 0.12);
+}
+
+.mindup-payment-layout {
+  width: min(1120px, calc(100% - 120px));
+  margin: 0 auto;
+  padding-top: 34px;
+  display: grid;
+  grid-template-columns: minmax(0, 0.92fr) minmax(360px, 0.72fr);
+  gap: 26px;
+  align-items: start;
+}
+
+.mindup-payment-card {
+  padding: 34px 30px;
+  border: 1px solid rgba(var(--brand-primary-rgb), 0.14);
+  border-radius: 30px;
+  background: var(--surface);
+}
+
+.mindup-payment-card--pix {
+  display: grid;
+  justify-items: center;
+  gap: 22px;
+}
+
+.mindup-payment-card__eyebrow {
+  margin: 0 0 14px;
+  color: var(--accent-blue);
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.mindup-payment-card__title {
+  margin: 0;
+  color: var(--text-main);
+  font-size: 46px;
+  line-height: 0.98;
+  font-weight: 800;
+  letter-spacing: 0;
+}
+
+.mindup-payment-card__description {
+  margin: 20px 0 0;
+  max-width: 640px;
+  color: rgba(var(--ink-rgb), 0.82);
+  font-size: 1.04rem;
+  line-height: 1.75;
+}
+
+.mindup-payment-card__button,
+.mindup-payment-copy button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  padding: 0 22px;
+  border: none;
+  border-radius: 999px;
+  background: var(--brand-primary);
+  color: var(--text-main);
+  font-size: 0.98rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.mindup-payment-card__button {
+  margin-top: 26px;
+}
+
+.mindup-payment-card__button:hover,
+.mindup-payment-copy button:hover {
+  background: var(--brand-primary-strong);
+  transform: translateY(-1px);
+}
+
+.mindup-payment-summary {
+  margin-top: 28px;
+  display: grid;
+  gap: 12px;
+}
+
+.mindup-payment-summary div {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 16px 18px;
+  border: 1px solid rgba(var(--brand-primary-rgb), 0.12);
+  border-radius: 18px;
+  background: rgba(var(--brand-primary-rgb), 0.03);
+  color: rgba(var(--ink-rgb), 0.78);
+}
+
+.mindup-payment-summary span {
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.mindup-payment-summary strong {
+  color: var(--text-main);
+  text-align: right;
+}
+
+.mindup-payment-qr {
+  display: grid;
+  place-items: center;
+  width: min(100%, 320px);
+  aspect-ratio: 1;
+  padding: 16px;
+  border: 1px solid rgba(var(--brand-primary-rgb), 0.16);
+  border-radius: 26px;
+  background: #ffffff;
+  color: var(--text-main);
+  font-weight: 800;
+}
+
+.mindup-payment-qr img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.mindup-payment-copy {
+  width: 100%;
+  display: grid;
+  gap: 12px;
+}
+
+.mindup-payment-copy span {
+  color: var(--text-main);
+  font-size: 1rem;
+  line-height: 1.3;
+  font-weight: 800;
+}
+
+.mindup-payment-copy code {
+  display: block;
+  max-height: 180px;
+  overflow: auto;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: var(--brand-primary-soft);
+  color: var(--text-main);
+  font-family: inherit;
+  font-size: 0.92rem;
+  line-height: 1.55;
+  word-break: break-word;
+}
+
+.mindup-payment-copy button {
+  width: 100%;
+}
+
+.mindup-payment-id {
+  width: 100%;
+  margin: 0;
+  color: rgba(var(--ink-rgb), 0.72);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  word-break: break-word;
+}
+
+.mindup-payment-id strong {
+  color: var(--text-main);
+}
+
+@media (max-width: 1100px) {
+  .mindup-payment-topbar,
+  .mindup-payment-layout {
+    width: min(100% - 72px, 1120px);
+  }
+
+  .mindup-payment-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .mindup-payment-card__title {
+    font-size: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .mindup-payment-page {
+    padding-bottom: 56px;
+  }
+
+  .mindup-payment-topbar,
+  .mindup-payment-layout {
+    width: min(100% - 32px, 1120px);
+  }
+
+  .mindup-payment-topbar {
+    padding: 22px 0 18px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .mindup-payment-layout {
+    padding-top: 24px;
+    gap: 18px;
+  }
+
+  .mindup-payment-card {
+    padding: 24px 20px;
+    border-radius: 24px;
+  }
+
+  .mindup-payment-card__title {
+    font-size: 32px;
+    line-height: 1;
+  }
+
+  .mindup-payment-card__description {
+    font-size: 0.98rem;
+    line-height: 1.68;
+  }
+
+  .mindup-payment-summary div {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .mindup-payment-summary strong {
+    text-align: left;
+  }
+
+  .mindup-payment-qr {
+    width: min(100%, 280px);
+    border-radius: 22px;
   }
 }

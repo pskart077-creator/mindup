@@ -1,52 +1,53 @@
 const BENEFITS = [
   {
-    title: "Energia mais constante",
+    title: "Pare de perder o ritmo",
     description:
-      "A DopaWay foi pensada para acompanhar sua rotina com mais constância, disposição e presença ao longo do dia.",
+      "Quando a rotina exige mais, você precisa de uma escolha que acompanhe seu ritmo com mais disposição e constância.",
   },
   {
-    title: "Foco para manter o ritmo",
+    title: "Foco para executar",
     description:
-      "Uma proposta criada para quem busca mais clareza mental, intensidade e continuidade nas atividades diárias.",
+      "Menos dia arrastado, mais presença para fazer o que precisa ser feito com clareza e intenção.",
   },
   {
-    title: "Composição com proposta premium",
+    title: "Atitude de alta performance",
     description:
-      "Desenvolvida para reforçar uma rotina de performance, disciplina e melhor aproveitamento do seu dia.",
+      "MindUp combina com quem quer parar de aceitar uma rotina no automático e começar a render de verdade.",
   },
   {
-    title: "Mais presença na rotina",
+    title: "Compra com vantagem real",
     description:
-      "Uma escolha para quem quer sustentar produtividade, atenção e uma sensação de maior controle no dia a dia.",
+      "Kits com preço melhor por frasco, frete grátis e garantia de 30 dias para você decidir com segurança.",
   },
 ] as const;
 
 export function BenefitsSection() {
   return (
-    <section id="beneficios" className="dopaway-benefits-section">
-      <div className="dopaway-benefits-section__container">
-        <div className="dopaway-benefits-section__head">
-          <span className="dopaway-benefits-section__eyebrow">
-            Benefícios da DopaWay
+    <section id="beneficios" className="mindup-benefits-section">
+      <div className="mindup-benefits-section__container">
+        <div className="mindup-benefits-section__head">
+          <span className="mindup-benefits-section__eyebrow">
+            Por que comprar agora
           </span>
 
-          <h2 className="dopaway-benefits-section__title">
-            Uma proposta premium para quem quer mais foco, energia e constância
+          <h2 className="mindup-benefits-section__title">
+            Sua rotina não precisa vencer você. Coloque foco no carrinho hoje.
           </h2>
 
-          <p className="dopaway-benefits-section__subtitle">
-            A DopaWay foi criada para acompanhar uma rotina intensa com uma
-            proposta mais forte de presença, clareza e continuidade ao longo do dia.
+          <p className="mindup-benefits-section__subtitle">
+            MindUp foi feita para quem sabe que disposição, clareza e constância
+            mudam o jogo. Se você vai continuar exigindo mais de si, escolha um
+            produto que acompanha essa decisão.
           </p>
         </div>
 
-        <div className="dopaway-benefits-section__grid">
+        <div className="mindup-benefits-section__grid">
           {BENEFITS.map((item) => (
             <article
               key={item.title}
-              className="dopaway-benefits-section__card"
+              className="mindup-benefits-section__card"
             >
-              <span className="dopaway-benefits-section__card-icon">
+              <span className="mindup-benefits-section__card-icon">
                 <svg viewBox="0 0 24 24" fill="none">
                   <path
                     d="M9 12.5L11 14.5L15.5 10"
@@ -65,11 +66,11 @@ export function BenefitsSection() {
                 </svg>
               </span>
 
-              <h3 className="dopaway-benefits-section__card-title">
+              <h3 className="mindup-benefits-section__card-title">
                 {item.title}
               </h3>
 
-              <p className="dopaway-benefits-section__card-description">
+              <p className="mindup-benefits-section__card-description">
                 {item.description}
               </p>
             </article>

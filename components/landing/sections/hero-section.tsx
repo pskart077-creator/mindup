@@ -8,32 +8,30 @@ type HeroSectionProps = {
 
 export function HeroSection({ product }: HeroSectionProps) {
   return (
-    <section id="inicio" className="dopaway-hero">
-      <div className="dopaway-hero__top-line" />
-
-      <div className="dopaway-hero__container">
-        <div className="dopaway-hero__content">
-          <span className="dopaway-hero__eyebrow">
-            A Energia Natural Que Impulsiona Seu Foco Todos os Dias
+    <section id="inicio" className="mindup-hero">
+      <div className="mindup-hero__container">
+        <div className="mindup-hero__content">
+          <span className="mindup-hero__eyebrow">
+            Oferta ativa com frete grátis para todo o Brasil
           </span>
 
-          <h1 className="dopaway-hero__title">
-            Mais disposição, clareza e presença para uma rotina de alta performance.
+          <h1 className="mindup-hero__title">
+            Pare de deixar o cansaço decidir pelo seu dia.
           </h1>
 
-          <p className="dopaway-hero__text">
-            Se você sente que falta ritmo, motivação e constância no dia a dia, a DopaWay foi criada para acompanhar sua rotina com mais intensidade. Com uma proposta moderna e marcante, ela representa foco, energia e atitude para quem quer produzir mais, render melhor e manter a mente alinhada com seus objetivos.
+          <p className="mindup-hero__text">
+            MindUp é para quem quer mais disposição, clareza e constância sem enrolação. Escolha seu kit, aproveite o frete grátis e coloque sua rotina no modo foco hoje.
           </p>
 
-          <div className="dopaway-hero__actions">
-            <Link href="/checkout" className="dopaway-hero__button">
-              Comprar Agora
+          <div className="mindup-hero__actions">
+            <Link href="/checkout" className="mindup-hero__button">
+              Garantir MindUp Agora
             </Link>
           </div>
 
-          <div className="dopaway-hero__trust">
-            <div className="dopaway-hero__trust-item">
-              <span className="dopaway-hero__trust-icon">
+          <div className="mindup-hero__trust">
+            <div className="mindup-hero__trust-item">
+              <span className="mindup-hero__trust-icon">
                 <svg viewBox="0 0 24 24" fill="none">
                   <path
                     d="M12 3L18.5 5.5V11.5C18.5 15.5 15.9 19.1 12 20.5C8.1 19.1 5.5 15.5 5.5 11.5V5.5L12 3Z"
@@ -52,12 +50,12 @@ export function HeroSection({ product }: HeroSectionProps) {
                 </svg>
               </span>
               <div>
-                <strong>Compra Segura</strong>
+                <strong>Frete Grátis</strong>
               </div>
             </div>
 
-            <div className="dopaway-hero__trust-item">
-              <span className="dopaway-hero__trust-icon">
+            <div className="mindup-hero__trust-item">
+              <span className="mindup-hero__trust-icon">
                 <svg viewBox="0 0 24 24" fill="none">
                   <path
                     d="M8 5V7"
@@ -95,12 +93,12 @@ export function HeroSection({ product }: HeroSectionProps) {
                 </svg>
               </span>
               <div>
-                <strong>Satisfação Garantida</strong>
+                <strong>Garantia de 30 Dias</strong>
               </div>
             </div>
 
-            <div className="dopaway-hero__trust-item">
-              <span className="dopaway-hero__trust-icon">
+            <div className="mindup-hero__trust-item">
+              <span className="mindup-hero__trust-icon">
                 <svg viewBox="0 0 24 24" fill="none">
                   <rect
                     x="5"
@@ -121,20 +119,20 @@ export function HeroSection({ product }: HeroSectionProps) {
                 </svg>
               </span>
               <div>
-                <strong>Privacidade Protegida</strong>
+                <strong>Compra Segura</strong>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="dopaway-hero__visual">
-          <div className="dopaway-hero__image-wrap">
+        <div className="mindup-hero__visual">
+          <div className="mindup-hero__image-wrap">
             <Image
-              src="/assets/image/hero/dopaway.png"
-              alt="Image DopaWay"
+              src="/assets/image/hero/mindup.png"
+              alt="Image MindUp"
               fill
               priority
-              className="dopaway-hero__image"
+              className="mindup-hero__image"
             />
           </div>
         </div>

@@ -1,34 +1,34 @@
 const PERFORMANCE_POINTS = [
-  "Mais energia para sustentar uma rotina intensa com maior constância",
-  "Mais clareza mental para manter atenção em tarefas longas e exigentes",
-  "Mais presença, ritmo e disciplina para o dia render em alto nível",
-  "Uma proposta premium para quem valoriza foco, desempenho e consistência",
+  "Mais disposição para não entregar metade do que você poderia fazer",
+  "Mais clareza para manter a cabeça no que realmente importa",
+  "Mais constância para atravessar o dia sem abandonar o ritmo",
+  "Mais vantagem comprando em kit, com frete grátis em qualquer opção",
 ] as const;
 
 export function PerformanceSection() {
   return (
-    <section className="dopaway-performance-section">
-      <div className="dopaway-performance-section__container">
-        <div className="dopaway-performance-section__head">
-          <span className="dopaway-performance-section__eyebrow">
-            Performance com mais presença
+    <section className="mindup-performance-section">
+      <div className="mindup-performance-section__container">
+        <div className="mindup-performance-section__head">
+          <span className="mindup-performance-section__eyebrow">
+            Decisão de quem quer render
           </span>
 
-          <h2 className="dopaway-performance-section__title">
-            Mais foco, energia e constância para sustentar o seu ritmo
+          <h2 className="mindup-performance-section__title">
+            O dia vai cobrar. Entre nele com mais foco e energia.
           </h2>
 
-          <p className="dopaway-performance-section__subtitle">
-            A DopaWay foi pensada para acompanhar rotinas que exigem mais da mente,
-            do corpo e da disciplina diária, com uma proposta premium para quem quer
-            manter intensidade e presença ao longo do dia.
+          <p className="mindup-performance-section__subtitle">
+            Você já sabe como é começar animado e perder força no meio do caminho.
+            MindUp entra como apoio para uma rotina mais intensa, mais presente e
+            com menos espaço para desculpa.
           </p>
         </div>
 
-        <div className="dopaway-performance-section__grid">
+        <div className="mindup-performance-section__grid">
           {PERFORMANCE_POINTS.map((point) => (
-            <article key={point} className="dopaway-performance-section__item">
-              <span className="dopaway-performance-section__icon">
+            <article key={point} className="mindup-performance-section__item">
+              <span className="mindup-performance-section__icon">
                 <svg viewBox="0 0 24 24" fill="none">
                   <path
                     d="M9 12.5L11 14.5L15.5 10"
@@ -47,7 +47,7 @@ export function PerformanceSection() {
                 </svg>
               </span>
 
-              <p className="dopaway-performance-section__text">{point}</p>
+              <p className="mindup-performance-section__text">{point}</p>
             </article>
           ))}
         </div>

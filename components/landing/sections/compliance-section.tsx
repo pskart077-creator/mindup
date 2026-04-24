@@ -1,24 +1,24 @@
 export function ComplianceSection() {
   return (
-    <section className="dopaway-compliance-section">
-      <div className="dopaway-compliance-section__container">
-        <div className="dopaway-compliance-section__badge">
+    <section className="mindup-compliance-section">
+      <div className="mindup-compliance-section__container">
+        <div className="mindup-compliance-section__badge">
           <span>ANVISA</span>
         </div>
 
-        <div className="dopaway-compliance-section__copy">
-          <span className="dopaway-compliance-section__eyebrow">
-            Qualidade e confiança
+        <div className="mindup-compliance-section__copy">
+          <span className="mindup-compliance-section__eyebrow">
+            Segurança para comprar sem enrolação
           </span>
 
-          <h2 className="dopaway-compliance-section__title">
-            Produto com padrão de qualidade, rastreabilidade e mais segurança na escolha
+          <h2 className="mindup-compliance-section__title">
+            MindUp entrega uma experiência de compra clara, rastreável e confiável
           </h2>
 
-          <p className="dopaway-compliance-section__description">
-            A DopaWay segue uma proposta de qualidade pensada para transmitir mais
-            confiança em cada etapa, com atenção ao padrão de fabricação, controle
-            de lote e consistência na experiência do produto.
+          <p className="mindup-compliance-section__description">
+            Você sabe o que está comprando, escolhe o kit com vantagem, recebe
+            frete grátis e conclui tudo em um checkout seguro. Menos dúvida, mais
+            decisão.
           </p>
         </div>
       </div>

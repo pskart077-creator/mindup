@@ -1,6 +1,12 @@
 "use client";
 
 import { FormEvent, useMemo, useState } from "react";
+import { useRouter } from "next/navigation";
+import {
+  CHECKOUT_PAYMENT_STORAGE_KEY,
+  CheckoutPaymentResult,
+  CheckoutPaymentTotals,
+} from "@/lib/checkout-payment";
 import { ProductConfig, formatCurrency } from "@/lib/product";
 
 type FreightOption = {
@@ -8,15 +14,6 @@ type FreightOption = {
   label: string;
   priceCents: number;
   etaDays: number;
-};
-
-type CheckoutResult = {
-  paymentId: string;
-  status: string;
-  billingType: string;
-  invoiceUrl?: string | null;
-  bankSlipUrl?: string | null;
-  pixCopyPaste?: string | null;
 };
 
 type CheckoutFormProps = {
@@ -53,14 +50,18 @@ const INITIAL_FORM: FormData = {
   quantity: 1,
 };
 
+function formatFreightPrice(priceCents: number) {
+  return priceCents === 0 ? "Gratis" : formatCurrency(priceCents);
+}
+
 export function CheckoutForm({ product }: CheckoutFormProps) {
+  const router = useRouter();
   const [formData, setFormData] = useState<FormData>(INITIAL_FORM);
   const [freightOptions, setFreightOptions] = useState<FreightOption[]>([]);
   const [selectedFreightId, setSelectedFreightId] = useState<string>("");
   const [isFreightLoading, setIsFreightLoading] = useState(false);
   const [isCheckoutLoading, setIsCheckoutLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string>("");
-  const [checkoutResult, setCheckoutResult] = useState<CheckoutResult | null>(null);
 
   const selectedFreight = useMemo(
     () => freightOptions.find((option) => option.id === selectedFreightId),
@@ -82,7 +83,6 @@ export function CheckoutForm({ product }: CheckoutFormProps) {
     }
 
     setErrorMessage("");
-    setCheckoutResult(null);
     setIsFreightLoading(true);
 
     try {
@@ -101,7 +101,7 @@ export function CheckoutForm({ product }: CheckoutFormProps) {
       };
 
       if (!response.ok || !data.options?.length) {
-        throw new Error(data.error ?? "Não foi possível calcular o frete.");
+        throw new Error(data.error ?? "Nao foi possivel calcular o frete.");
       }
 
       setFreightOptions(data.options);
@@ -126,7 +126,6 @@ export function CheckoutForm({ product }: CheckoutFormProps) {
     }
 
     setErrorMessage("");
-    setCheckoutResult(null);
     setIsCheckoutLoading(true);
 
     try {
@@ -140,15 +139,28 @@ export function CheckoutForm({ product }: CheckoutFormProps) {
       });
 
       const data = (await response.json()) as {
-        payment?: CheckoutResult;
+        payment?: CheckoutPaymentResult;
+        totals?: CheckoutPaymentTotals;
         error?: string;
       };
 
-      if (!response.ok || !data.payment) {
-        throw new Error(data.error ?? "Não foi possível gerar o pagamento.");
+      if (!response.ok || !data.payment || !data.totals) {
+        throw new Error(data.error ?? "Nao foi possivel gerar o pagamento.");
       }
 
-      setCheckoutResult(data.payment);
+      sessionStorage.setItem(
+        CHECKOUT_PAYMENT_STORAGE_KEY,
+        JSON.stringify({
+          payment: data.payment,
+          totals: data.totals,
+          productName: product.name,
+          quantity: formData.quantity,
+          customerName: formData.fullName,
+          createdAt: new Date().toISOString(),
+        })
+      );
+
+      router.push("/checkout/pagamento");
     } catch (error) {
       const message =
         error instanceof Error ? error.message : "Falha ao iniciar o pagamento.";
@@ -159,22 +171,22 @@ export function CheckoutForm({ product }: CheckoutFormProps) {
   }
 
   return (
-    <div className="dopaway-checkout-panel">
-      <div className="dopaway-checkout-panel__head">
-        <span className="dopaway-checkout-panel__eyebrow">
-          Finalize sua compra
+    <div className="mindup-checkout-panel">
+      <div className="mindup-checkout-panel__head">
+        <span className="mindup-checkout-panel__eyebrow">
+          Pedido MindUp
         </span>
-        <h2 className="dopaway-checkout-panel__title">
-          Preencha seus dados para calcular o frete e concluir seu pedido
+        <h2 className="mindup-checkout-panel__title">
+          Preencha seus dados e garanta seu pedido agora
         </h2>
-        <p className="dopaway-checkout-panel__subtitle">
-          Complete as informações abaixo para escolher o frete e gerar seu pagamento
-          com mais segurança.
+        <p className="mindup-checkout-panel__subtitle">
+          Quanto antes voce finaliza, antes sua MindUp entra em separacao.
+          Consulte o frete gratis, confirme os dados e gere o PIX com seguranca.
         </p>
       </div>
 
-      <form className="dopaway-checkout-form" onSubmit={handleCheckout}>
-        <label className="dopaway-checkout-field">
+      <form className="mindup-checkout-form" onSubmit={handleCheckout}>
+        <label className="mindup-checkout-field">
           <span>Nome completo</span>
           <input
             value={formData.fullName}
@@ -184,8 +196,8 @@ export function CheckoutForm({ product }: CheckoutFormProps) {
           />
         </label>
 
-        <div className="dopaway-checkout-grid-two">
-          <label className="dopaway-checkout-field">
+        <div className="mindup-checkout-grid-two">
+          <label className="mindup-checkout-field">
             <span>E-mail</span>
             <input
               type="email"
@@ -196,7 +208,7 @@ export function CheckoutForm({ product }: CheckoutFormProps) {
             />
           </label>
 
-          <label className="dopaway-checkout-field">
+          <label className="mindup-checkout-field">
             <span>Telefone</span>
             <input
               value={formData.phone}
@@ -207,18 +219,18 @@ export function CheckoutForm({ product }: CheckoutFormProps) {
           </label>
         </div>
 
-        <div className="dopaway-checkout-grid-two">
-          <label className="dopaway-checkout-field">
+        <div className="mindup-checkout-grid-two">
+          <label className="mindup-checkout-field">
             <span>CPF ou CNPJ</span>
             <input
               value={formData.cpfCnpj}
               onChange={(event) => updateField("cpfCnpj", event.target.value)}
-              placeholder="Digite apenas números"
+              placeholder="Digite apenas numeros"
               required
             />
           </label>
 
-          <label className="dopaway-checkout-field">
+          <label className="mindup-checkout-field">
             <span>Quantidade</span>
             <select
               value={formData.quantity}
@@ -233,8 +245,8 @@ export function CheckoutForm({ product }: CheckoutFormProps) {
           </label>
         </div>
 
-        <div className="dopaway-checkout-grid-two">
-          <label className="dopaway-checkout-field">
+        <div className="mindup-checkout-grid-two">
+          <label className="mindup-checkout-field">
             <span>CEP</span>
             <input
               value={formData.cep}
@@ -244,8 +256,8 @@ export function CheckoutForm({ product }: CheckoutFormProps) {
             />
           </label>
 
-          <label className="dopaway-checkout-field">
-            <span>Número</span>
+          <label className="mindup-checkout-field">
+            <span>Numero</span>
             <input
               value={formData.addressNumber}
               onChange={(event) => updateField("addressNumber", event.target.value)}
@@ -255,7 +267,7 @@ export function CheckoutForm({ product }: CheckoutFormProps) {
           </label>
         </div>
 
-        <label className="dopaway-checkout-field">
+        <label className="mindup-checkout-field">
           <span>Rua ou avenida</span>
           <input
             value={formData.street}
@@ -265,8 +277,8 @@ export function CheckoutForm({ product }: CheckoutFormProps) {
           />
         </label>
 
-        <div className="dopaway-checkout-grid-two">
-          <label className="dopaway-checkout-field">
+        <div className="mindup-checkout-grid-two">
+          <label className="mindup-checkout-field">
             <span>Bairro</span>
             <input
               value={formData.district}
@@ -276,18 +288,18 @@ export function CheckoutForm({ product }: CheckoutFormProps) {
             />
           </label>
 
-          <label className="dopaway-checkout-field">
+          <label className="mindup-checkout-field">
             <span>Complemento</span>
             <input
               value={formData.complement}
               onChange={(event) => updateField("complement", event.target.value)}
-              placeholder="Apartamento, bloco, referência..."
+              placeholder="Apartamento, bloco, referencia..."
             />
           </label>
         </div>
 
-        <div className="dopaway-checkout-grid-two">
-          <label className="dopaway-checkout-field">
+        <div className="mindup-checkout-grid-two">
+          <label className="mindup-checkout-field">
             <span>Cidade</span>
             <input
               value={formData.city}
@@ -297,7 +309,7 @@ export function CheckoutForm({ product }: CheckoutFormProps) {
             />
           </label>
 
-          <label className="dopaway-checkout-field">
+          <label className="mindup-checkout-field">
             <span>UF</span>
             <input
               value={formData.state}
@@ -311,96 +323,61 @@ export function CheckoutForm({ product }: CheckoutFormProps) {
 
         <button
           type="button"
-          className="dopaway-checkout-secondary-button"
+          className="mindup-checkout-secondary-button"
           onClick={handleCalculateFreight}
           disabled={isFreightLoading}
         >
-          {isFreightLoading ? "Calculando frete..." : "Calcular frete"}
+          {isFreightLoading ? "Calculando frete..." : "Consultar frete gratis"}
         </button>
 
         {freightOptions.length > 0 ? (
-          <label className="dopaway-checkout-field">
-            <span>Escolha o frete</span>
+          <label className="mindup-checkout-field">
+            <span>Escolha o frete gratis</span>
             <select
               value={selectedFreightId}
               onChange={(event) => setSelectedFreightId(event.target.value)}
             >
               {freightOptions.map((option) => (
                 <option key={option.id} value={option.id}>
-                  {option.label} • {formatCurrency(option.priceCents)} • {option.etaDays} dias úteis
+                  {option.label} - {formatFreightPrice(option.priceCents)} -{" "}
+                  {option.etaDays} dias uteis
                 </option>
               ))}
             </select>
           </label>
         ) : null}
 
-        <div className="dopaway-checkout-summary">
-          <div className="dopaway-checkout-summary__row">
+        <div className="mindup-checkout-summary">
+          <div className="mindup-checkout-summary__row">
             <span>Produto ({formData.quantity}x)</span>
             <strong>{formatCurrency(subtotalCents)}</strong>
           </div>
 
-          <div className="dopaway-checkout-summary__row">
+          <div className="mindup-checkout-summary__row">
             <span>Frete</span>
             <strong>
-              {selectedFreight ? formatCurrency(freightCents) : "Calcule o frete"}
+              {selectedFreight ? formatFreightPrice(freightCents) : "Consulte o frete"}
             </strong>
           </div>
 
-          <div className="dopaway-checkout-summary__row dopaway-checkout-summary__row--total">
+          <div className="mindup-checkout-summary__row mindup-checkout-summary__row--total">
             <span>Total</span>
             <strong>{formatCurrency(totalCents)}</strong>
           </div>
         </div>
 
         {errorMessage ? (
-          <div className="dopaway-checkout-error">{errorMessage}</div>
+          <div className="mindup-checkout-error">{errorMessage}</div>
         ) : null}
 
         <button
           type="submit"
-          className="dopaway-checkout-primary-button"
+          className="mindup-checkout-primary-button"
           disabled={isCheckoutLoading}
         >
-          {isCheckoutLoading ? "Gerando pagamento..." : "Gerar pagamento"}
+          {isCheckoutLoading ? "Gerando PIX..." : "Garantir meu pedido"}
         </button>
       </form>
-
-      {checkoutResult ? (
-        <section className="dopaway-checkout-result">
-          <p className="dopaway-checkout-result__title">
-            Pagamento gerado com sucesso
-          </p>
-
-          <p className="dopaway-checkout-result__meta">
-            ID do pagamento: <strong>{checkoutResult.paymentId}</strong>
-          </p>
-
-          <p className="dopaway-checkout-result__meta">
-            Status: <strong>{checkoutResult.status}</strong>
-          </p>
-
-          <div className="dopaway-checkout-result__links">
-            {checkoutResult.invoiceUrl ? (
-              <a href={checkoutResult.invoiceUrl} target="_blank" rel="noreferrer">
-                Abrir link de pagamento
-              </a>
-            ) : null}
-
-            {checkoutResult.bankSlipUrl ? (
-              <a href={checkoutResult.bankSlipUrl} target="_blank" rel="noreferrer">
-                Abrir boleto
-              </a>
-            ) : null}
-          </div>
-
-          {checkoutResult.pixCopyPaste ? (
-            <p className="dopaway-checkout-result__pix">
-              PIX copia e cola: {checkoutResult.pixCopyPaste}
-            </p>
-          ) : null}
-        </section>
-      ) : null}
     </div>
   );
 }

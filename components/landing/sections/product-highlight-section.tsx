@@ -2,37 +2,38 @@ import Image from "next/image";
 
 export function ProductHighlightSection() {
   return (
-    <section className="dopaway-highlight-section">
-      <div className="dopaway-highlight-section__container">
-        <div className="dopaway-highlight-section__visual">
-          <div className="dopaway-highlight-section__image-wrap">
+    <section className="mindup-highlight-section">
+      <div className="mindup-highlight-section__container">
+        <div className="mindup-highlight-section__visual">
+          <div className="mindup-highlight-section__image-wrap">
             <Image
-              src="/assets/image/hero/dopaway.png"
-              alt="Produto DopaWay"
+              src="/assets/image/hero/mindup-02.png"
+              alt="Produto MindUp"
               fill
-              className="dopaway-highlight-section__image"
+              className="mindup-highlight-section__image"
             />
           </div>
         </div>
 
-        <div className="dopaway-highlight-section__copy">
-          <span className="dopaway-highlight-section__eyebrow">
-            Alta performance com proposta premium
+        <div className="mindup-highlight-section__copy">
+          <span className="mindup-highlight-section__eyebrow">
+            Produto no carrinho, rotina em outro nível
           </span>
 
-          <h2 className="dopaway-highlight-section__title">
-            Produto premium para rotina de foco e intensidade
+          <h2 className="mindup-highlight-section__title">
+            MindUp é para quem cansou de funcionar no mínimo.
           </h2>
 
-          <p className="dopaway-highlight-section__description">
-            Estruturado para pessoas que exigem desempenho constante. A proposta
-            é facilitar a adesão diária, mantendo praticidade, consistência e uma
-            experiência mais forte para quem busca foco, energia e presença na rotina.
+          <p className="mindup-highlight-section__description">
+            Sua rotina não espera você estar no clima. Ela exige presença, ritmo e
+            energia. MindUp foi posicionada para quem quer entrar no dia com mais
+            foco e comprar sem complicação: kit escolhido, frete grátis e checkout
+            direto.
           </p>
 
-          <ul className="dopaway-highlight-section__list">
-            <li className="dopaway-highlight-section__item">
-              <span className="dopaway-highlight-section__icon">
+          <ul className="mindup-highlight-section__list">
+            <li className="mindup-highlight-section__item">
+              <span className="mindup-highlight-section__icon">
                 <svg viewBox="0 0 24 24" fill="none">
                   <path
                     d="M9 12.5L11 14.5L15.5 10"
@@ -50,11 +51,11 @@ export function ProductHighlightSection() {
                   />
                 </svg>
               </span>
-              <span>Uso simples no dia a dia, sem preparo complexo</span>
+              <span>Uso simples para encaixar na rotina sem complicar seu dia</span>
             </li>
 
-            <li className="dopaway-highlight-section__item">
-              <span className="dopaway-highlight-section__icon">
+            <li className="mindup-highlight-section__item">
+              <span className="mindup-highlight-section__icon">
                 <svg viewBox="0 0 24 24" fill="none">
                   <path
                     d="M9 12.5L11 14.5L15.5 10"
@@ -72,11 +73,11 @@ export function ProductHighlightSection() {
                   />
                 </svg>
               </span>
-              <span>Posicionamento premium para audiência de alta intenção</span>
+              <span>Proposta forte para foco, disposição e constância diária</span>
             </li>
 
-            <li className="dopaway-highlight-section__item">
-              <span className="dopaway-highlight-section__icon">
+            <li className="mindup-highlight-section__item">
+              <span className="mindup-highlight-section__icon">
                 <svg viewBox="0 0 24 24" fill="none">
                   <path
                     d="M9 12.5L11 14.5L15.5 10"
@@ -94,11 +95,11 @@ export function ProductHighlightSection() {
                   />
                 </svg>
               </span>
-              <span>Fluxo comercial completo com landing e checkout dedicado</span>
+              <span>Kits com vantagem progressiva para você pagar menos por frasco</span>
             </li>
 
-            <li className="dopaway-highlight-section__item">
-              <span className="dopaway-highlight-section__icon">
+            <li className="mindup-highlight-section__item">
+              <span className="mindup-highlight-section__icon">
                 <svg viewBox="0 0 24 24" fill="none">
                   <path
                     d="M9 12.5L11 14.5L15.5 10"
@@ -116,7 +117,7 @@ export function ProductHighlightSection() {
                   />
                 </svg>
               </span>
-              <span>Acompanhamento de pagamento com retorno imediato da cobrança</span>
+              <span>Frete grátis, compra segura e garantia de 30 dias</span>
             </li>
           </ul>
         </div>

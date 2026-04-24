@@ -1,11 +1,11 @@
-# Site DopaWay
+# Site MindUp
 
 Landing page em Next.js para venda de produto encapsulado com:
 
 - Landing page modular (secoes separadas por componente)
 - Checkout em pagina dedicada (`/checkout`)
 - Calculo de frete por CEP
-- Criacao de cobranca na Asaas via API
+- Criacao de cobranca PIX na VexusPay via API
 
 ## 1) Configurar ambiente
 
@@ -17,9 +17,11 @@ cp .env.example .env.local
 
 Variaveis principais:
 
-- `ASAAS_API_KEY`: chave da API Asaas
-- `ASAAS_API_URL`: `https://api-sandbox.asaas.com` (teste) ou producao
-- `ASAAS_BILLING_TYPE`: `PIX`, `BOLETO` ou `CREDIT_CARD`
+- `VEXUSPAY_CLIENT_ID`: client id da VexusPay
+- `VEXUSPAY_CLIENT_SECRET`: client secret da VexusPay
+- `VEXUSPAY_API_URL`: `https://api.vexuspay.com`
+- `VEXUSPAY_WEBHOOK_URL`: URL publica HTTPS para receber status da transacao. Nao use `localhost`.
+- `SITE_URL`: dominio publico do site, usado como fallback para montar o webhook
 - `PRODUCT_NAME`: nome do produto
 - `PRODUCT_PRICE_CENTS`: preco unitario em centavos
 
@@ -43,5 +45,5 @@ Abra `http://localhost:3000`.
 2. Pagamento acontece na pagina dedicada (`/checkout`).
 3. API `/api/freight` calcula opcoes de envio por CEP.
 4. API `/api/checkout` valida e recalcula frete no servidor.
-5. Sistema cria cliente e pagamento na Asaas.
-6. Frontend exibe link de pagamento/PIX.
+5. Sistema cria a transacao PIX na VexusPay.
+6. Frontend exibe o PIX copia-e-cola retornado pela VexusPay.

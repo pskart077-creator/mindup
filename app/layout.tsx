@@ -10,18 +10,18 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "DopaWay | Foco, Energia e Alta Performance",
+  title: "MindUp | Foco e Energia com Frete Grátis",
   description:
-    "Conheça a DopaWay, uma proposta premium para quem busca mais foco, energia, constância e presença na rotina.",
+    "Garanta MindUp com frete grátis, kits com melhor custo por frasco e 30 dias de garantia para uma rotina com mais foco, energia e constância.",
   icons: {
-    icon: "/icon.svg",
-    shortcut: "/icon.svg",
-    apple: "/icon.svg",
+    icon: "/icon.ico",
+    shortcut: "/favicon.ico",
+    apple: "/assets/image/icon/flaticon.ico",
   },
   openGraph: {
-    title: "DopaWay | Foco, Energia e Alta Performance",
+    title: "MindUp | Foco e Energia com Frete Grátis",
     description:
-      "Conheça a DopaWay, uma proposta premium para quem busca mais foco, energia, constância e presença na rotina.",
+      "Garanta MindUp com frete grátis, kits com melhor custo por frasco e 30 dias de garantia para uma rotina com mais foco, energia e constância.",
     type: "website",
     locale: "pt_BR",
   },

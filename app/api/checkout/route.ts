@@ -1,18 +1,17 @@
 import { NextResponse } from "next/server";
 import {
-  createAsaasCustomer,
-  createAsaasPayment,
-  getAsaasPixQrCode
-} from "@/lib/asaas";
-import {
   normalizeCheckoutPayload,
   validateCheckoutPayload
 } from "@/lib/checkout-schema";
 import { calculateFreight } from "@/lib/freight";
+import {
+  createVexusPixTransaction,
+  getVexusWebhookUrl
+} from "@/lib/vexuspay";
 
 function getProductConfig() {
-  const name = process.env.PRODUCT_NAME ?? "Encapsulado DopaWay";
-  const priceCents = Number(process.env.PRODUCT_PRICE_CENTS ?? "12990");
+  const name = process.env.PRODUCT_NAME ?? "Encapsulado MindUp";
+  const priceCents = Number(process.env.PRODUCT_PRICE_CENTS ?? "5790");
 
   if (!Number.isFinite(priceCents) || priceCents <= 0) {
     throw new Error("PRODUCT_PRICE_CENTS invalido.");
@@ -21,14 +20,12 @@ function getProductConfig() {
   return { name, priceCents };
 }
 
-function getDueDate(daysAhead = 1) {
-  const now = new Date();
-  now.setDate(now.getDate() + daysAhead);
-  return now.toISOString().slice(0, 10);
-}
-
 function validateDocument(document: string) {
   return document.length === 11 || document.length === 14;
+}
+
+function createTransactionId() {
+  return `mindup-${Date.now()}-${globalThis.crypto.randomUUID()}`;
 }
 
 export async function POST(request: Request) {
@@ -71,43 +68,27 @@ export async function POST(request: Request) {
     const productTotalCents = payload.quantity * product.priceCents;
     const totalCents = productTotalCents + freightOption.priceCents;
     const totalValue = Number((totalCents / 100).toFixed(2));
-    const billingType = (process.env.ASAAS_BILLING_TYPE ?? "PIX").toUpperCase();
 
-    const customerId = await createAsaasCustomer({
-      name: payload.fullName,
-      cpfCnpj: payload.cpfCnpj,
-      email: payload.email,
-      phone: payload.phone,
-      postalCode: payload.cep,
-      address: payload.street,
-      addressNumber: payload.addressNumber,
-      complement: payload.complement,
-      province: payload.district
-    });
-
-    const payment = await createAsaasPayment({
-      customer: customerId,
-      billingType,
-      value: totalValue,
-      dueDate: getDueDate(1),
+    const transaction = await createVexusPixTransaction({
+      amount: totalValue,
+      payerName: payload.fullName,
+      payerDocument: payload.cpfCnpj,
+      payerEmail: payload.email,
+      transactionId: createTransactionId(),
       description: `${product.name} (${payload.quantity}x)`,
-      externalReference: `site-${Date.now()}`
+      projectWebhook: getVexusWebhookUrl(request.url)
     });
-
-    const pixData =
-      payment.billingType === "PIX"
-        ? await getAsaasPixQrCode(payment.id)
-        : null;
 
     return NextResponse.json(
       {
         payment: {
-          paymentId: payment.id,
-          status: payment.status,
-          billingType: payment.billingType,
-          invoiceUrl: payment.invoiceUrl ?? null,
-          bankSlipUrl: payment.bankSlipUrl ?? null,
-          pixCopyPaste: pixData?.payload ?? null
+          paymentId: transaction.transactionId,
+          status: transaction.status,
+          billingType: "PIX",
+          invoiceUrl: null,
+          bankSlipUrl: null,
+          pixCopyPaste: transaction.qrcode,
+          pixQrCodeImage: transaction.qrcodeImage
         },
         totals: {
           productCents: productTotalCents,
