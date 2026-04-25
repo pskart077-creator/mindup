@@ -19,6 +19,8 @@ type LandingPageProps = {
   product: ProductConfig;
 };
 
+const SHOW_VSL_SECTION = false;
+
 export function LandingPage({ product }: LandingPageProps) {
   return (
     <div className="landing-shell">
@@ -27,7 +29,7 @@ export function LandingPage({ product }: LandingPageProps) {
 
       <main className="landing-main">
         <Header />
-        <VslSection />
+        {SHOW_VSL_SECTION ? <VslSection /> : null}
         <HeroSection product={product} />
         <ProductHighlightSection />
         <BenefitsSection />
