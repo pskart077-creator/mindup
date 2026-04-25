@@ -1,6 +1,13 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import { CheckoutForm } from "@/components/checkout/checkout-form";
 import { getProductConfig } from "@/lib/product";
+
+export const metadata: Metadata = {
+  title: "Checkout Seguro",
+  description:
+    "Preencha seus dados, escolha o frete gratis e gere o PIX para garantir sua MindUp.",
+};
 
 export default function CheckoutPage() {
   const product = getProductConfig();

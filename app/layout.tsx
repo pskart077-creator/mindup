@@ -10,20 +10,31 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "MindUp | Foco e Energia com Frete Grátis",
+  applicationName: "MindUp",
+  title: {
+    default: "MindUp | Foco e Energia com Frete Gratis",
+    template: "%s | MindUp",
+  },
   description:
-    "Garanta MindUp com frete grátis, kits com melhor custo por frasco e 30 dias de garantia para uma rotina com mais foco, energia e constância.",
+    "Garanta MindUp com frete gratis, kits com melhor custo por frasco e 30 dias de garantia para uma rotina com mais foco, energia e constancia.",
   icons: {
     icon: "/icon.ico",
     shortcut: "/favicon.ico",
     apple: "/assets/image/icon/flaticon.ico",
   },
   openGraph: {
-    title: "MindUp | Foco e Energia com Frete Grátis",
+    title: "MindUp | Foco e Energia com Frete Gratis",
     description:
-      "Garanta MindUp com frete grátis, kits com melhor custo por frasco e 30 dias de garantia para uma rotina com mais foco, energia e constância.",
+      "Garanta MindUp com frete gratis, kits com melhor custo por frasco e 30 dias de garantia para uma rotina com mais foco, energia e constancia.",
     type: "website",
     locale: "pt_BR",
+    siteName: "MindUp",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "MindUp | Foco e Energia com Frete Gratis",
+    description:
+      "Garanta MindUp com frete gratis, kits com melhor custo por frasco e 30 dias de garantia.",
   },
 };
 
