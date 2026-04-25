@@ -49,6 +49,7 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <body className={poppins.variable}>
+        {/* Meta Pixel Code */}
         <Script id="meta-pixel" strategy="afterInteractive">
           {`
             !function(f,b,e,v,n,t,s)
@@ -73,6 +74,7 @@ export default function RootLayout({
             alt=""
           />
         </noscript>
+        {/* End Meta Pixel Code */}
 
         {children}
       </body>
