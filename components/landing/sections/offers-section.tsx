@@ -109,7 +109,7 @@ export function OffersSection({ product }: OffersSectionProps) {
                   </p>
 
                   <p className="mindup-offers-section__unit-price">
-                    {formatCurrency(unitPrice)} por frasco com 30 capsulas
+                    {formatCurrency(unitPrice)} por frasco com 60 capsulas
                   </p>
                 </div>
 

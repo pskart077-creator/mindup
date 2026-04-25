@@ -51,7 +51,7 @@ export function ProductHighlightSection() {
                   />
                 </svg>
               </span>
-              <span>Cada frasco contem 30 capsulas para encaixar na rotina sem complicar seu dia</span>
+              <span>Cada frasco contem 60 capsulas para encaixar na rotina sem complicar seu dia</span>
             </li>
 
             <li className="mindup-highlight-section__item">
